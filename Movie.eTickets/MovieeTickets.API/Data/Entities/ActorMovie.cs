@@ -1,6 +1,6 @@
 ﻿namespace MovieeTickets.API.Data.Entities;
 
-public class Actor_Movie
+public class ActorMovie
 {
     public int MovieId { get; set; }
 

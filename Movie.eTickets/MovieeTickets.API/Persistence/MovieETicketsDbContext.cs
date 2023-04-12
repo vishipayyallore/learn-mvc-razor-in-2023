@@ -13,7 +13,7 @@ public class MovieETicketsDbContext : DbContext
 
     public DbSet<Movie> Movies => Set<Movie>();
 
-    // public DbSet<Actor_Movie> Actors_Movies { get; set; }
+    public DbSet<ActorMovie> ActorsMovies => Set<ActorMovie>();
 
     public DbSet<Cinema> Cinemas => Set<Cinema>();
 

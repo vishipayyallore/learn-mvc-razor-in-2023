@@ -15,4 +15,7 @@ public class Actor
 
     [Required]
     public string? Bio { get; set; }
+
+    //Relationships
+    public List<ActorMovie>? ActorsMovies { get; set; }
 }
