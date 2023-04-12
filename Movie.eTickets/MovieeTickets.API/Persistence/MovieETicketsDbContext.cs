@@ -19,4 +19,19 @@ public class MovieETicketsDbContext : DbContext
 
     public DbSet<Producer> Prducers => Set<Producer>();
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<ActorMovie>().HasKey(am => new
+        {
+            am.ActorId,
+            am.MovieId
+        });
+
+        modelBuilder.Entity<ActorMovie>().HasOne(m => m.Movie).WithMany(am => am.ActorsMovies).HasForeignKey(m => m.MovieId);
+
+        modelBuilder.Entity<ActorMovie>().HasOne(m => m.Actor).WithMany(am => am.ActorsMovies).HasForeignKey(m => m.ActorId);
+
+        base.OnModelCreating(modelBuilder);
+    }
+
 }
