@@ -1,7 +1,7 @@
-﻿using Movie.eTickets.Data.Enums;
+﻿using MovieeTickets.API.Data.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace Movie.eTickets.Data.Entities;
+namespace MovieeTickets.API.Data.Entities;
 
 public class Movie
 {

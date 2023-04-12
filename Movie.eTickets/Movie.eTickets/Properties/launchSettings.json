@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "https": {
+    "MovieeTickets.API": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

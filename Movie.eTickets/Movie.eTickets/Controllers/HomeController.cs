@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Movie.eTickets.Models;
+using MovieeTickets.API.Models;
 using System.Diagnostics;
 
-namespace Movie.eTickets.Controllers
+namespace MovieeTickets.API.Controllers
 {
     public class HomeController : Controller
     {
