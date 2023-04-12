@@ -15,4 +15,7 @@ public class Producer
 
     [Required]
     public string? Bio { get; set; }
+
+    //Relationships
+    public List<Movie>? Movies { get; set; }
 }

@@ -1,5 +1,6 @@
 ﻿using MovieeTickets.API.Data.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MovieeTickets.API.Data.Entities;
 
@@ -28,4 +29,19 @@ public class Movie
 
     [Required]
     public MovieCategory MovieCategory { get; set; }
+
+    //Relationships
+    public List<ActorMovie>? ActorsMovies { get; set; }
+
+    //Cinema
+    public int CinemaId { get; set; }
+
+    [ForeignKey("CinemaId")]
+    public Cinema? Cinema { get; set; }
+
+    //Producer
+    public int ProducerId { get; set; }
+
+    [ForeignKey("ProducerId")]
+    public Producer? Producer { get; set; }
 }
