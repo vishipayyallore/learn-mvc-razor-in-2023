@@ -14,15 +14,44 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{0A155791-72DB-47EF-BAA1-2EBA73C19679}"
 	ProjectSection(SolutionItems) = preProject
-		ToBeDone.txt = ToBeDone.txt
+		Documentation\Images\ToBeDone.txt = Documentation\Images\ToBeDone.txt
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2A55DA69-E915-41AD-BD01-261116BEA153}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{52BA43CD-0C5A-47B6-BB34-D73734FDBB23}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{948D1789-5964-47CB-B589-EB29310A1B3C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{629E9473-D36B-4D90-A1E7-844D835D7384}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{41225045-9B41-4586-B081-91ADB1A59440}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{3BD78E9D-B12A-4BAF-B12D-DD58EC54BD0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketsManagement.Domain", "src\Core\TicketsManagement.Domain\TicketsManagement.Domain.csproj", "{990AC340-D9E0-400C-8240-551523162242}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{990AC340-D9E0-400C-8240-551523162242}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{990AC340-D9E0-400C-8240-551523162242}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{990AC340-D9E0-400C-8240-551523162242}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{990AC340-D9E0-400C-8240-551523162242}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0A155791-72DB-47EF-BAA1-2EBA73C19679} = {7FD911D9-7CAE-4427-9AFD-C3F00F287499}
+		{948D1789-5964-47CB-B589-EB29310A1B3C} = {2A55DA69-E915-41AD-BD01-261116BEA153}
+		{629E9473-D36B-4D90-A1E7-844D835D7384} = {2A55DA69-E915-41AD-BD01-261116BEA153}
+		{41225045-9B41-4586-B081-91ADB1A59440} = {2A55DA69-E915-41AD-BD01-261116BEA153}
+		{3BD78E9D-B12A-4BAF-B12D-DD58EC54BD0F} = {2A55DA69-E915-41AD-BD01-261116BEA153}
+		{990AC340-D9E0-400C-8240-551523162242} = {629E9473-D36B-4D90-A1E7-844D835D7384}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AA8F43A3-D6EE-4D36-ACEF-DEBBE8601ECF}
