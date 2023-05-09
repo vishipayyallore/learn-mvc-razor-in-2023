@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using TicketsManagement.Application.Contracts.Persistence;
+using TicketsManagement.Application.Exceptions;
+using TicketsManagement.Domain.Entities;
 
 namespace TicketsManagement.Application.Features.Events.Commands.DeleteEvent
 {
@@ -24,9 +26,14 @@ namespace TicketsManagement.Application.Features.Events.Commands.DeleteEvent
                 throw new NotFoundException(nameof(Event), request.EventId);
             }
 
-            await _eventRepository.DeleteAsync(eventToDelete);
+            await _eventRepository.Delete(eventToDelete);
 
             return Unit.Value;
+        }
+
+        Task IRequestHandler<DeleteEventCommand>.Handle(DeleteEventCommand request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }
