@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using TicketsManagement.Application.Features.Categories.Commands.CreateCateogry;
+using TicketsManagement.Application.Features.Categories.Commands.CreateCategory;
 using TicketsManagement.Application.Features.Categories.Queries.GetCategoriesList;
 using TicketsManagement.Application.Features.Categories.Queries.GetCategoriesListWithEvents;
 using TicketsManagement.Application.Features.Events.Commands.CreateEvent;
