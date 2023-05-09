@@ -2,23 +2,23 @@
 using MediatR;
 using TicketsManagement.Application.Contracts.Persistence;
 
-namespace TicketsManagement.Application.Features.Categories.Queries.GetCategoriesListWithEvents
+namespace TicketsManagement.Application.Features.Categories.Queries.GetCategoriesListWithEvents;
+
+public class GetCategoriesListWithEventsQueryHandler : IRequestHandler<GetCategoriesListWithEventsQuery, List<CategoryEventListVm>>
 {
-    public class GetCategoriesListWithEventsQueryHandler : IRequestHandler<GetCategoriesListWithEventsQuery, List<CategoryEventListVm>>
+    private readonly IMapper _mapper;
+    private readonly ICategoryRepository _categoryRepository;
+
+    public GetCategoriesListWithEventsQueryHandler(IMapper mapper, ICategoryRepository categoryRepository)
     {
-        private readonly IMapper _mapper;
-        private readonly ICategoryRepository _categoryRepository;
+        _mapper = mapper;
+        _categoryRepository = categoryRepository;
+    }
 
-        public GetCategoriesListWithEventsQueryHandler(IMapper mapper, ICategoryRepository categoryRepository)
-        {
-            _mapper = mapper;
-            _categoryRepository = categoryRepository;
-        }
+    public async Task<List<CategoryEventListVm>> Handle(GetCategoriesListWithEventsQuery request, CancellationToken cancellationToken)
+    {
+        var list = await _categoryRepository.GetCategoriesWithEvents(request.IncludeHistory);
 
-        public async Task<List<CategoryEventListVm>> Handle(GetCategoriesListWithEventsQuery request, CancellationToken cancellationToken)
-        {
-            var list = await _categoryRepository.GetCategoriesWithEvents(request.IncludeHistory);
-            return _mapper.Map<List<CategoryEventListVm>>(list);
-        }
+        return _mapper.Map<List<CategoryEventListVm>>(list);
     }
 }
