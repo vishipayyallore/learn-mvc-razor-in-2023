@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using TicketsManagement.Application.Contracts.Persistence;
+using TicketsManagement.Application.Exceptions;
+using TicketsManagement.Domain.Entities;
 
 namespace TicketsManagement.Application.Features.Events.Commands.UpdateEvent
 {
@@ -32,9 +34,14 @@ namespace TicketsManagement.Application.Features.Events.Commands.UpdateEvent
 
             _mapper.Map(request, eventToUpdate, typeof(UpdateEventCommand), typeof(Event));
 
-            await _eventRepository.UpdateAsync(eventToUpdate);
+            await _eventRepository.Update(eventToUpdate);
 
             return Unit.Value;
+        }
+
+        Task IRequestHandler<UpdateEventCommand>.Handle(UpdateEventCommand request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

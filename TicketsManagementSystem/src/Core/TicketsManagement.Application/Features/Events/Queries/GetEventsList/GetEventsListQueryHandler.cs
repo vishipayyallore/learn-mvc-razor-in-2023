@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using TicketsManagement.Application.Contracts.Persistence;
+using TicketsManagement.Domain.Entities;
 
 namespace TicketsManagement.Application.Features.Events.Queries.GetEventsList
 {
