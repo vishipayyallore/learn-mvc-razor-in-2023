@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-namespace GloboTicket.TicketManagement.Application.Features.Events.Commands.UpdateEvent
+namespace TicketsManagement.Application.Features.Events.Commands.UpdateEvent
 {
-    public class UpdateEventCommand: IRequest
+    public class UpdateEventCommand : IRequest
     {
         public Guid EventId { get; set; }
         public string Name { get; set; } = string.Empty;

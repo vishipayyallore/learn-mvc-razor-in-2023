@@ -1,12 +1,8 @@
-﻿using GloboTicket.TicketManagement.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using TicketsManagement.Domain.Entities;
 
-namespace GloboTicket.TicketManagement.Application.Contracts.Persistence
+namespace TicketsManagement.Application.Contracts.Persistence;
+
+public interface IOrderRepository : IGenericRepository<Order>
 {
-    public interface IOrderRepository: IAsyncRepository<Order>
-    {
-        
-    }
+
 }

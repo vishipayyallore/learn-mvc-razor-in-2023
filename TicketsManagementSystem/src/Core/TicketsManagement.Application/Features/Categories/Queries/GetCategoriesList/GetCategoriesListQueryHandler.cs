@@ -1,16 +1,15 @@
 ﻿using AutoMapper;
-using GloboTicket.TicketManagement.Application.Contracts.Persistence;
-using GloboTicket.TicketManagement.Domain.Entities;
 using MediatR;
+using TicketsManagement.Application.Contracts.Persistence;
 
-namespace GloboTicket.TicketManagement.Application.Features.Categories.Queries.GetCategoriesList
+namespace TicketsManagement.Application.Features.Categories.Queries.GetCategoriesList
 {
     public class GetCategoriesListQueryHandler : IRequestHandler<GetCategoriesListQuery, List<CategoryListVm>>
     {
-        private readonly IAsyncRepository<Category> _categoryRepository;
+        private readonly IGenericRepository<Category> _categoryRepository;
         private readonly IMapper _mapper;
 
-        public GetCategoriesListQueryHandler(IMapper mapper, IAsyncRepository<Category> categoryRepository)
+        public GetCategoriesListQueryHandler(IMapper mapper, IGenericRepository<Category> categoryRepository)
         {
             _mapper = mapper;
             _categoryRepository = categoryRepository;
@@ -18,7 +17,7 @@ namespace GloboTicket.TicketManagement.Application.Features.Categories.Queries.G
 
         public async Task<List<CategoryListVm>> Handle(GetCategoriesListQuery request, CancellationToken cancellationToken)
         {
-            var allCategories = (await _categoryRepository.ListAllAsync()).OrderBy(x => x.Name);
+            var allCategories = (await _categoryRepository.ListAll()).OrderBy(x => x.Name);
             return _mapper.Map<List<CategoryListVm>>(allCategories);
         }
     }

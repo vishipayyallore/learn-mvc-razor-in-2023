@@ -1,17 +1,15 @@
 ﻿using AutoMapper;
-using GloboTicket.TicketManagement.Application.Contracts.Persistence;
-using GloboTicket.TicketManagement.Application.Exceptions;
-using GloboTicket.TicketManagement.Domain.Entities;
 using MediatR;
+using TicketsManagement.Application.Contracts.Persistence;
 
-namespace GloboTicket.TicketManagement.Application.Features.Events.Commands.UpdateEvent
+namespace TicketsManagement.Application.Features.Events.Commands.UpdateEvent
 {
     public class UpdateEventCommandHandler : IRequestHandler<UpdateEventCommand>
     {
-        private readonly IAsyncRepository<Event> _eventRepository;
+        private readonly IGenericRepository<Event> _eventRepository;
         private readonly IMapper _mapper;
 
-        public UpdateEventCommandHandler(IMapper mapper, IAsyncRepository<Event> eventRepository)
+        public UpdateEventCommandHandler(IMapper mapper, IGenericRepository<Event> eventRepository)
         {
             _mapper = mapper;
             _eventRepository = eventRepository;
@@ -20,7 +18,7 @@ namespace GloboTicket.TicketManagement.Application.Features.Events.Commands.Upda
         public async Task<Unit> Handle(UpdateEventCommand request, CancellationToken cancellationToken)
         {
 
-            var eventToUpdate = await _eventRepository.GetByIdAsync(request.EventId);
+            var eventToUpdate = await _eventRepository.GetById(request.EventId);
             if (eventToUpdate == null)
             {
                 throw new NotFoundException(nameof(Event), request.EventId);

@@ -1,16 +1,15 @@
 ﻿using AutoMapper;
-using GloboTicket.TicketManagement.Application.Contracts.Persistence;
-using GloboTicket.TicketManagement.Domain.Entities;
 using MediatR;
+using TicketsManagement.Application.Contracts.Persistence;
 
-namespace GloboTicket.TicketManagement.Application.Features.Categories.Commands.CreateCateogry
+namespace TicketsManagement.Application.Features.Categories.Commands.CreateCateogry
 {
     public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, CreateCategoryCommandResponse>
     {
-        private readonly IAsyncRepository<Category> _categoryRepository;
+        private readonly IGenericRepository<Category> _categoryRepository;
         private readonly IMapper _mapper;
 
-        public CreateCategoryCommandHandler(IMapper mapper, IAsyncRepository<Category> categoryRepository)
+        public CreateCategoryCommandHandler(IMapper mapper, IGenericRepository<Category> categoryRepository)
         {
             _mapper = mapper;
             _categoryRepository = categoryRepository;
@@ -35,7 +34,7 @@ namespace GloboTicket.TicketManagement.Application.Features.Categories.Commands.
             if (createCategoryCommandResponse.Success)
             {
                 var category = new Category() { Name = request.Name };
-                category = await _categoryRepository.AddAsync(category);
+                category = await _categoryRepository.Add(category);
                 createCategoryCommandResponse.Category = _mapper.Map<CreateCategoryDto>(category);
             }
 

@@ -1,11 +1,8 @@
-﻿using GloboTicket.TicketManagement.Domain.Entities;
-using System;
-using System.Threading.Tasks;
+﻿using TicketsManagement.Domain.Entities;
 
-namespace GloboTicket.TicketManagement.Application.Contracts.Persistence
+namespace TicketsManagement.Application.Contracts.Persistence;
+
+public interface IEventRepository : IGenericRepository<Event>
 {
-    public interface IEventRepository : IAsyncRepository<Event>
-    {
-        Task<bool> IsEventNameAndDateUnique(string name, DateTime eventDate);
-    }
+    Task<bool> IsEventNameAndDateUnique(string name, DateTime eventDate);
 }
