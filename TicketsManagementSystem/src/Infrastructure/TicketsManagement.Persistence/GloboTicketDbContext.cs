@@ -1,11 +1,10 @@
-﻿using GloboTicket.TicketManagement.Application.Contracts;
-using GloboTicket.TicketManagement.Domain.Common;
-using GloboTicket.TicketManagement.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using TicketsManagement.Domain.Common;
+using TicketsManagement.Domain.Entities;
 
-namespace GloboTicket.TicketManagement.Persistence
+namespace TicketsManagement.Persistence
 {
-    public class GloboTicketDbContext: DbContext
+    public class GloboTicketDbContext : DbContext
     {
         public GloboTicketDbContext(DbContextOptions<GloboTicketDbContext> options)
            : base(options)

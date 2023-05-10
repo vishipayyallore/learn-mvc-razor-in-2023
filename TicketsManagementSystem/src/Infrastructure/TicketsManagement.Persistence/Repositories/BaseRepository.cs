@@ -1,7 +1,7 @@
-﻿using GloboTicket.TicketManagement.Application.Contracts.Persistence;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using TicketsManagement.Application.Contracts.Persistence;
 
-namespace GloboTicket.TicketManagement.Persistence.Repositories
+namespace TicketsManagement.Persistence.Repositories
 {
     public class BaseRepository<T> : IAsyncRepository<T> where T : class
     {

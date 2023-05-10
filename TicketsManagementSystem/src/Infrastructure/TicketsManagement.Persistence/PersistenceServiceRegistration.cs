@@ -1,10 +1,10 @@
-﻿using GloboTicket.TicketManagement.Application.Contracts.Persistence;
-using GloboTicket.TicketManagement.Persistence.Repositories;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TicketsManagement.Application.Contracts.Persistence;
+using TicketsManagement.Persistence.Repositories;
 
-namespace GloboTicket.TicketManagement.Persistence
+namespace TicketsManagement.Persistence
 {
     public static class PersistenceServiceRegistration
     {
@@ -19,7 +19,7 @@ namespace GloboTicket.TicketManagement.Persistence
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
 
-            return services;    
+            return services;
         }
     }
 }
