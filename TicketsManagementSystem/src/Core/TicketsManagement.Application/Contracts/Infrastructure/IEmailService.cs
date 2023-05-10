@@ -1,5 +1,4 @@
 ﻿using TicketsManagement.Application.Models.Mail;
-using System.Threading.Tasks;
 
 namespace TicketsManagement.Application.Contracts.Infrastructure
 {

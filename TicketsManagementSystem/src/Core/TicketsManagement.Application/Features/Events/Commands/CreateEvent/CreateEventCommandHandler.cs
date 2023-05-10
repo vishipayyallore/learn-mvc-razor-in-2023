@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using MediatR;
 using TicketsManagement.Application.Contracts.Infrastructure;
 using TicketsManagement.Application.Contracts.Persistence;
 using TicketsManagement.Application.Models.Mail;
 using TicketsManagement.Domain.Entities;
-using MediatR;
 
 namespace TicketsManagement.Application.Features.Events.Commands.CreateEvent
 {

@@ -1,8 +1,8 @@
-﻿using TicketsManagement.Application.Contracts.Infrastructure;
-using TicketsManagement.Application.Models.Mail;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using TicketsManagement.Application.Contracts.Infrastructure;
+using TicketsManagement.Application.Models.Mail;
 
 namespace TicketsManagement.Infrastructure.Mail;
 

@@ -11,7 +11,7 @@ using TicketsManagement.Domain.Entities;
 
 namespace TicketsManagement.Application.Profiles
 {
-    public class MappingProfile: Profile
+    public class MappingProfile : Profile
     {
         public MappingProfile()
         {

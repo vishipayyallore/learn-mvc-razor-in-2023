@@ -2,7 +2,7 @@
 
 namespace TicketsManagement.Application.Features.Categories.Commands.CreateCateogry
 {
-    public class CreateCategoryCommandValidator: AbstractValidator<CreateCategoryCommand>
+    public class CreateCategoryCommandValidator : AbstractValidator<CreateCategoryCommand>
     {
         public CreateCategoryCommandValidator()
         {

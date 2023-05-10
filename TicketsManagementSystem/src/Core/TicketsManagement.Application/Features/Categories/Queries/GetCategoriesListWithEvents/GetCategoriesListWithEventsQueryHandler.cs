@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using TicketsManagement.Application.Contracts.Persistence;
 using MediatR;
+using TicketsManagement.Application.Contracts.Persistence;
 
 namespace TicketsManagement.Application.Features.Categories.Queries.GetCategoriesListWithEvents
 {

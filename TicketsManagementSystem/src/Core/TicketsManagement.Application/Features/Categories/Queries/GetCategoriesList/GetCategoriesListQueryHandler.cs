@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using MediatR;
 using TicketsManagement.Application.Contracts.Persistence;
 using TicketsManagement.Domain.Entities;
-using MediatR;
 
 namespace TicketsManagement.Application.Features.Categories.Queries.GetCategoriesList
 {

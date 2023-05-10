@@ -1,6 +1,4 @@
 ﻿using TicketsManagement.Domain.Entities;
-using System;
-using System.Threading.Tasks;
 
 namespace TicketsManagement.Application.Contracts.Persistence
 {

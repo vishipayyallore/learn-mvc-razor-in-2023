@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using MediatR;
 using TicketsManagement.Application.Contracts.Persistence;
 using TicketsManagement.Application.Exceptions;
 using TicketsManagement.Domain.Entities;
-using MediatR;
 
 namespace TicketsManagement.Application.Features.Events.Commands.DeleteEvent
 {
@@ -10,7 +10,7 @@ namespace TicketsManagement.Application.Features.Events.Commands.DeleteEvent
     {
         private readonly IAsyncRepository<Event> _eventRepository;
         private readonly IMapper _mapper;
-        
+
         public DeleteEventCommandHandler(IMapper mapper, IAsyncRepository<Event> eventRepository)
         {
             _mapper = mapper;

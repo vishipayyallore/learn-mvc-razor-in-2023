@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using MediatR;
 using TicketsManagement.Application.Contracts.Persistence;
 using TicketsManagement.Application.Exceptions;
 using TicketsManagement.Domain.Entities;
-using MediatR;
 
 namespace TicketsManagement.Application.Features.Events.Queries.GetEventDetail
 {
@@ -23,7 +23,7 @@ namespace TicketsManagement.Application.Features.Events.Queries.GetEventDetail
         {
             var @event = await _eventRepository.GetByIdAsync(request.Id);
             var eventDetailDto = _mapper.Map<EventDetailVm>(@event);
-            
+
             var category = await _categoryRepository.GetByIdAsync(@event.CategoryId);
 
             if (category == null)
