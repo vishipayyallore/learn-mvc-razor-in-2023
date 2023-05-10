@@ -1,4 +1,4 @@
-﻿namespace TicketsManagement.Application.Responses
+﻿namespace GloboTicket.TicketManagement.Application.Responses
 {
     public class BaseResponse
     {

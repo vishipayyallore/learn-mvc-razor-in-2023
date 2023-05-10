@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using TicketsManagement.Application.Contracts.Persistence;
+using GloboTicket.TicketManagement.Application.Contracts.Persistence;
 using MediatR;
 
-namespace TicketsManagement.Application.Features.Orders.GetOrdersForMonth
+namespace GloboTicket.TicketManagement.Application.Features.Orders.GetOrdersForMonth
 {
     public class GetOrdersForMonthQueryHandler : IRequestHandler<GetOrdersForMonthQuery, PagedOrdersForMonthVm>
     {

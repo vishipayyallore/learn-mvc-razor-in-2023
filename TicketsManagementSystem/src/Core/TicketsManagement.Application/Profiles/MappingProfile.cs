@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
-using TicketsManagement.Application.Features.Categories.Commands.CreateCateogry;
-using TicketsManagement.Application.Features.Categories.Queries.GetCategoriesList;
-using TicketsManagement.Application.Features.Categories.Queries.GetCategoriesListWithEvents;
-using TicketsManagement.Application.Features.Events.Commands.CreateEvent;
-using TicketsManagement.Application.Features.Events.Commands.UpdateEvent;
-using TicketsManagement.Application.Features.Events.Queries.GetEventDetail;
-using TicketsManagement.Application.Features.Events.Queries.GetEventsList;
-using TicketsManagement.Application.Features.Orders.GetOrdersForMonth;
-using TicketsManagement.Domain.Entities;
+using GloboTicket.TicketManagement.Application.Features.Categories.Commands.CreateCateogry;
+using GloboTicket.TicketManagement.Application.Features.Categories.Queries.GetCategoriesList;
+using GloboTicket.TicketManagement.Application.Features.Categories.Queries.GetCategoriesListWithEvents;
+using GloboTicket.TicketManagement.Application.Features.Events.Commands.CreateEvent;
+using GloboTicket.TicketManagement.Application.Features.Events.Commands.UpdateEvent;
+using GloboTicket.TicketManagement.Application.Features.Events.Queries.GetEventDetail;
+using GloboTicket.TicketManagement.Application.Features.Events.Queries.GetEventsList;
+using GloboTicket.TicketManagement.Application.Features.Orders.GetOrdersForMonth;
+using GloboTicket.TicketManagement.Domain.Entities;
 
-namespace TicketsManagement.Application.Profiles
+namespace GloboTicket.TicketManagement.Application.Profiles
 {
     public class MappingProfile: Profile
     {

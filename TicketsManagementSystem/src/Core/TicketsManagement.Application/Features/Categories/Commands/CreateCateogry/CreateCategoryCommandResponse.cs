@@ -1,6 +1,6 @@
-﻿using TicketsManagement.Application.Responses;
+﻿using GloboTicket.TicketManagement.Application.Responses;
 
-namespace TicketsManagement.Application.Features.Categories.Commands.CreateCateogry
+namespace GloboTicket.TicketManagement.Application.Features.Categories.Commands.CreateCateogry
 {
     public class CreateCategoryCommandResponse: BaseResponse
     {

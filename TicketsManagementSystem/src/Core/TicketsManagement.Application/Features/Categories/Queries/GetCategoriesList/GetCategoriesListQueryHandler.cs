@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using TicketsManagement.Application.Contracts.Persistence;
-using TicketsManagement.Domain.Entities;
+using GloboTicket.TicketManagement.Application.Contracts.Persistence;
+using GloboTicket.TicketManagement.Domain.Entities;
 using MediatR;
 
-namespace TicketsManagement.Application.Features.Categories.Queries.GetCategoriesList
+namespace GloboTicket.TicketManagement.Application.Features.Categories.Queries.GetCategoriesList
 {
     public class GetCategoriesListQueryHandler : IRequestHandler<GetCategoriesListQuery, List<CategoryListVm>>
     {

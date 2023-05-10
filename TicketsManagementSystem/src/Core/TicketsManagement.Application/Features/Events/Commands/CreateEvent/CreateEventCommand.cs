@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace TicketsManagement.Application.Features.Events.Commands.CreateEvent
+namespace GloboTicket.TicketManagement.Application.Features.Events.Commands.CreateEvent
 {
     public class CreateEventCommand: IRequest<Guid>
     {

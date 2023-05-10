@@ -1,8 +1,8 @@
-﻿using TicketsManagement.Domain.Entities;
+﻿using GloboTicket.TicketManagement.Domain.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace TicketsManagement.Application.Contracts.Persistence
+namespace GloboTicket.TicketManagement.Application.Contracts.Persistence
 {
     public interface ICategoryRepository : IAsyncRepository<Category>
     {

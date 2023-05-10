@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using TicketsManagement.Application.Contracts.Persistence;
-using TicketsManagement.Application.Exceptions;
-using TicketsManagement.Domain.Entities;
+using GloboTicket.TicketManagement.Application.Contracts.Persistence;
+using GloboTicket.TicketManagement.Application.Exceptions;
+using GloboTicket.TicketManagement.Domain.Entities;
 using MediatR;
 
-namespace TicketsManagement.Application.Features.Events.Commands.DeleteEvent
+namespace GloboTicket.TicketManagement.Application.Features.Events.Commands.DeleteEvent
 {
     public class DeleteEventCommandHandler : IRequestHandler<DeleteEventCommand>
     {
