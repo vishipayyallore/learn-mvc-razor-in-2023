@@ -1,24 +1,25 @@
 ﻿using AutoMapper;
+using GloboTicket.TicketManagement.Application.Contracts.Persistence;
+using GloboTicket.TicketManagement.Domain.Entities;
 using MediatR;
-using TicketsManagement.Application.Contracts.Persistence;
-using TicketsManagement.Domain.Entities;
 
-namespace TicketsManagement.Application.Features.Categories.Queries.GetCategoriesList;
-
-public class GetCategoriesListQueryHandler : IRequestHandler<GetCategoriesListQuery, List<CategoryListVm>>
+namespace GloboTicket.TicketManagement.Application.Features.Categories.Queries.GetCategoriesList
 {
-    private readonly IGenericRepository<Category> _categoryRepository;
-    private readonly IMapper _mapper;
-
-    public GetCategoriesListQueryHandler(IMapper mapper, IGenericRepository<Category> categoryRepository)
+    public class GetCategoriesListQueryHandler : IRequestHandler<GetCategoriesListQuery, List<CategoryListVm>>
     {
-        _mapper = mapper;
-        _categoryRepository = categoryRepository;
-    }
+        private readonly IAsyncRepository<Category> _categoryRepository;
+        private readonly IMapper _mapper;
 
-    public async Task<List<CategoryListVm>> Handle(GetCategoriesListQuery request, CancellationToken cancellationToken)
-    {
-        var allCategories = (await _categoryRepository.ListAll()).OrderBy(x => x.Name);
-        return _mapper.Map<List<CategoryListVm>>(allCategories);
+        public GetCategoriesListQueryHandler(IMapper mapper, IAsyncRepository<Category> categoryRepository)
+        {
+            _mapper = mapper;
+            _categoryRepository = categoryRepository;
+        }
+
+        public async Task<List<CategoryListVm>> Handle(GetCategoriesListQuery request, CancellationToken cancellationToken)
+        {
+            var allCategories = (await _categoryRepository.ListAllAsync()).OrderBy(x => x.Name);
+            return _mapper.Map<List<CategoryListVm>>(allCategories);
+        }
     }
 }

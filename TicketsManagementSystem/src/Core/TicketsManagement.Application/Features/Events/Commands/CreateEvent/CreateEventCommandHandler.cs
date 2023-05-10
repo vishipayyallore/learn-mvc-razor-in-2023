@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using GloboTicket.TicketManagement.Application.Contracts.Persistence;
+using GloboTicket.TicketManagement.Domain.Entities;
 using MediatR;
-using TicketsManagement.Application.Contracts.Persistence;
-using TicketsManagement.Domain.Entities;
 
-namespace TicketsManagement.Application.Features.Events.Commands.CreateEvent
+namespace GloboTicket.TicketManagement.Application.Features.Events.Commands.CreateEvent
 {
     public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, Guid>
     {
@@ -28,7 +28,7 @@ namespace TicketsManagement.Application.Features.Events.Commands.CreateEvent
             var @event = _mapper.Map<Event>(request);
 
 
-            @event = await _eventRepository.Add(@event);
+            @event = await _eventRepository.AddAsync(@event);
 
             return @event.EventId;
         }

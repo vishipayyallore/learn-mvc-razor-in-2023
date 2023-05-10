@@ -1,8 +1,9 @@
 ﻿using MediatR;
 
-namespace TicketsManagement.Application.Features.Categories.Queries.GetCategoriesListWithEvents;
-
-public class GetCategoriesListWithEventsQuery : IRequest<List<CategoryEventListVm>>
+namespace GloboTicket.TicketManagement.Application.Features.Categories.Queries.GetCategoriesListWithEvents
 {
-    public bool IncludeHistory { get; set; }
+    public class GetCategoriesListWithEventsQuery: IRequest<List<CategoryEventListVm>>
+    {
+        public bool IncludeHistory { get; set; }
+    }
 }

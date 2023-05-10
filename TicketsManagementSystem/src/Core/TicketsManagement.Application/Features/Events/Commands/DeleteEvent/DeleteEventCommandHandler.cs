@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
+using GloboTicket.TicketManagement.Application.Contracts.Persistence;
+using GloboTicket.TicketManagement.Application.Exceptions;
+using GloboTicket.TicketManagement.Domain.Entities;
 using MediatR;
-using TicketsManagement.Application.Contracts.Persistence;
-using TicketsManagement.Application.Exceptions;
-using TicketsManagement.Domain.Entities;
 
-namespace TicketsManagement.Application.Features.Events.Commands.DeleteEvent
+namespace GloboTicket.TicketManagement.Application.Features.Events.Commands.DeleteEvent
 {
     public class DeleteEventCommandHandler : IRequestHandler<DeleteEventCommand>
     {
-        private readonly IGenericRepository<Event> _eventRepository;
+        private readonly IAsyncRepository<Event> _eventRepository;
         private readonly IMapper _mapper;
-
-        public DeleteEventCommandHandler(IMapper mapper, IGenericRepository<Event> eventRepository)
+        
+        public DeleteEventCommandHandler(IMapper mapper, IAsyncRepository<Event> eventRepository)
         {
             _mapper = mapper;
             _eventRepository = eventRepository;
@@ -19,21 +19,16 @@ namespace TicketsManagement.Application.Features.Events.Commands.DeleteEvent
 
         public async Task<Unit> Handle(DeleteEventCommand request, CancellationToken cancellationToken)
         {
-            var eventToDelete = await _eventRepository.GetById(request.EventId);
+            var eventToDelete = await _eventRepository.GetByIdAsync(request.EventId);
 
             if (eventToDelete == null)
             {
                 throw new NotFoundException(nameof(Event), request.EventId);
             }
 
-            await _eventRepository.Delete(eventToDelete);
+            await _eventRepository.DeleteAsync(eventToDelete);
 
             return Unit.Value;
-        }
-
-        Task IRequestHandler<DeleteEventCommand>.Handle(DeleteEventCommand request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
         }
     }
 }

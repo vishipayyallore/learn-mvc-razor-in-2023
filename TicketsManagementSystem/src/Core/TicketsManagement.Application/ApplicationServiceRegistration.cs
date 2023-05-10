@@ -1,15 +1,17 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
-namespace TicketsManagement.Application;
-
-public static class ApplicationServiceRegistration
+namespace GloboTicket.TicketManagement.Application
 {
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    public static class ApplicationServiceRegistration
     {
-        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-        services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        {
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 
-        return services;
+            return services;
+        }
     }
 }

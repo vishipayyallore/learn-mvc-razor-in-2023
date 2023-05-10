@@ -1,18 +1,19 @@
 ﻿using FluentValidation.Results;
 
-namespace TicketsManagement.Application.Exceptions;
-
-public class ValidationException : Exception
+namespace GloboTicket.TicketManagement.Application.Exceptions
 {
-    public List<string> ValidationErrors { get; set; }
-
-    public ValidationException(ValidationResult validationResult)
+    public class ValidationException : Exception
     {
-        ValidationErrors = new List<string>();
+        public List<string> ValdationErrors { get; set; }
 
-        foreach (var validationError in validationResult.Errors)
+        public ValidationException(ValidationResult validationResult)
         {
-            ValidationErrors.Add(validationError.ErrorMessage);
+            ValdationErrors = new List<string>();
+
+            foreach (var validationError in validationResult.Errors)
+            {
+                ValdationErrors.Add(validationError.ErrorMessage);
+            }
         }
     }
 }

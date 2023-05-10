@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace TicketsManagement.Application.Features.Orders.GetOrdersForMonth
+namespace GloboTicket.TicketManagement.Application.Features.Orders.GetOrdersForMonth
 {
     public class GetOrdersForMonthQuery : IRequest<PagedOrdersForMonthVm>
     {

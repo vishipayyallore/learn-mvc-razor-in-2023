@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
+using GloboTicket.TicketManagement.Application.Contracts.Persistence;
+using GloboTicket.TicketManagement.Application.Exceptions;
+using GloboTicket.TicketManagement.Domain.Entities;
 using MediatR;
-using TicketsManagement.Application.Contracts.Persistence;
-using TicketsManagement.Application.Exceptions;
-using TicketsManagement.Domain.Entities;
 
-namespace TicketsManagement.Application.Features.Events.Commands.UpdateEvent
+namespace GloboTicket.TicketManagement.Application.Features.Events.Commands.UpdateEvent
 {
     public class UpdateEventCommandHandler : IRequestHandler<UpdateEventCommand>
     {
-        private readonly IGenericRepository<Event> _eventRepository;
+        private readonly IAsyncRepository<Event> _eventRepository;
         private readonly IMapper _mapper;
 
-        public UpdateEventCommandHandler(IMapper mapper, IGenericRepository<Event> eventRepository)
+        public UpdateEventCommandHandler(IMapper mapper, IAsyncRepository<Event> eventRepository)
         {
             _mapper = mapper;
             _eventRepository = eventRepository;
@@ -20,7 +20,7 @@ namespace TicketsManagement.Application.Features.Events.Commands.UpdateEvent
         public async Task<Unit> Handle(UpdateEventCommand request, CancellationToken cancellationToken)
         {
 
-            var eventToUpdate = await _eventRepository.GetById(request.EventId);
+            var eventToUpdate = await _eventRepository.GetByIdAsync(request.EventId);
             if (eventToUpdate == null)
             {
                 throw new NotFoundException(nameof(Event), request.EventId);
@@ -34,14 +34,9 @@ namespace TicketsManagement.Application.Features.Events.Commands.UpdateEvent
 
             _mapper.Map(request, eventToUpdate, typeof(UpdateEventCommand), typeof(Event));
 
-            await _eventRepository.Update(eventToUpdate);
+            await _eventRepository.UpdateAsync(eventToUpdate);
 
             return Unit.Value;
-        }
-
-        Task IRequestHandler<UpdateEventCommand>.Handle(UpdateEventCommand request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
         }
     }
 }
