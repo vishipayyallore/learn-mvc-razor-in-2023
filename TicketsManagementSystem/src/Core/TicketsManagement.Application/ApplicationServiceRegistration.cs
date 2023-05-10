@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace GloboTicket.TicketManagement.Application
+namespace TicketsManagement.Application
 {
     public static class ApplicationServiceRegistration
     {

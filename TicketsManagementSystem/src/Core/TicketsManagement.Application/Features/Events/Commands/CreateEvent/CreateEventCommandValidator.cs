@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
-using GloboTicket.TicketManagement.Application.Contracts.Persistence;
+using TicketsManagement.Application.Contracts.Persistence;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GloboTicket.TicketManagement.Application.Features.Events.Commands.CreateEvent
+namespace TicketsManagement.Application.Features.Events.Commands.CreateEvent
 {
     public class CreateEventCommandValidator : AbstractValidator<CreateEventCommand>
     {
