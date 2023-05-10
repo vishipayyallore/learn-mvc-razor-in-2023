@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace GloboTicket.TicketManagement.Application.Features.Events.Queries.GetEventDetail
+namespace TicketsManagement.Application.Features.Events.Queries.GetEventDetail
 {
     public class GetEventDetailQuery: IRequest<EventDetailVm>
     {

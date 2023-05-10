@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using GloboTicket.TicketManagement.Application.Contracts.Infrastructure;
-using GloboTicket.TicketManagement.Application.Contracts.Persistence;
-using GloboTicket.TicketManagement.Application.Models.Mail;
-using GloboTicket.TicketManagement.Domain.Entities;
+using TicketsManagement.Application.Contracts.Infrastructure;
+using TicketsManagement.Application.Contracts.Persistence;
+using TicketsManagement.Application.Models.Mail;
+using TicketsManagement.Domain.Entities;
 using MediatR;
 
-namespace GloboTicket.TicketManagement.Application.Features.Events.Commands.CreateEvent
+namespace TicketsManagement.Application.Features.Events.Commands.CreateEvent
 {
     public class CreateEventCommandHandler : IRequestHandler<CreateEventCommand, Guid>
     {

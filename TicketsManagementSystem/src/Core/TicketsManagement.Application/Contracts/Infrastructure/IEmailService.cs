@@ -1,7 +1,7 @@
-﻿using GloboTicket.TicketManagement.Application.Models.Mail;
+﻿using TicketsManagement.Application.Models.Mail;
 using System.Threading.Tasks;
 
-namespace GloboTicket.TicketManagement.Application.Contracts.Infrastructure
+namespace TicketsManagement.Application.Contracts.Infrastructure
 {
     public interface IEmailService
     {

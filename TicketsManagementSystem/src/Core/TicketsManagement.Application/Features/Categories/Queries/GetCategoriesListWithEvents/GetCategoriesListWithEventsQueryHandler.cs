@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using GloboTicket.TicketManagement.Application.Contracts.Persistence;
+using TicketsManagement.Application.Contracts.Persistence;
 using MediatR;
 
-namespace GloboTicket.TicketManagement.Application.Features.Categories.Queries.GetCategoriesListWithEvents
+namespace TicketsManagement.Application.Features.Categories.Queries.GetCategoriesListWithEvents
 {
     public class GetCategoriesListWithEventsQueryHandler : IRequestHandler<GetCategoriesListWithEventsQuery, List<CategoryEventListVm>>
     {

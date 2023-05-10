@@ -1,4 +1,4 @@
-﻿namespace GloboTicket.TicketManagement.Application.Exceptions
+﻿namespace TicketsManagement.Application.Exceptions
 {
     public class NotFoundException : Exception
     {

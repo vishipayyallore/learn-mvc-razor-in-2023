@@ -1,4 +1,4 @@
-﻿namespace GloboTicket.TicketManagement.Application.Models.Mail
+﻿namespace TicketsManagement.Application.Models.Mail
 {
     public class Email
     {

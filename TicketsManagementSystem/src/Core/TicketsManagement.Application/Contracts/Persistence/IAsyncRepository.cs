@@ -1,4 +1,4 @@
-﻿namespace GloboTicket.TicketManagement.Application.Contracts.Persistence
+﻿namespace TicketsManagement.Application.Contracts.Persistence
 {
     public interface IAsyncRepository<T> where T : class
     {

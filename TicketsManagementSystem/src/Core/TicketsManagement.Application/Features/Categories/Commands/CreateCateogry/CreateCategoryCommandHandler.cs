@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using GloboTicket.TicketManagement.Application.Contracts.Persistence;
-using GloboTicket.TicketManagement.Domain.Entities;
+using TicketsManagement.Application.Contracts.Persistence;
+using TicketsManagement.Domain.Entities;
 using MediatR;
 
-namespace GloboTicket.TicketManagement.Application.Features.Categories.Commands.CreateCateogry
+namespace TicketsManagement.Application.Features.Categories.Commands.CreateCateogry
 {
     public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, CreateCategoryCommandResponse>
     {
