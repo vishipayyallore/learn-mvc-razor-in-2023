@@ -1,51 +1,50 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TicketsManagement.Application.Contracts.Persistence;
 
-namespace TicketsManagement.Persistence.Repositories
+namespace TicketsManagement.Persistence.Repositories;
+
+public class BaseRepository<T> : IAsyncRepository<T> where T : class
 {
-    public class BaseRepository<T> : IAsyncRepository<T> where T : class
+    protected readonly GloboTicketDbContext _dbContext;
+
+    public BaseRepository(GloboTicketDbContext dbContext)
     {
-        protected readonly GloboTicketDbContext _dbContext;
+        _dbContext = dbContext;
+    }
 
-        public BaseRepository(GloboTicketDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+    public virtual async Task<T?> GetByIdAsync(Guid id)
+    {
+        T? t = await _dbContext.Set<T>().FindAsync(id);
+        return t;
+    }
 
-        public virtual async Task<T?> GetByIdAsync(Guid id)
-        {
-            T? t = await _dbContext.Set<T>().FindAsync(id);
-            return t;
-        }
+    public async Task<IReadOnlyList<T>> ListAllAsync()
+    {
+        return await _dbContext.Set<T>().ToListAsync();
+    }
 
-        public async Task<IReadOnlyList<T>> ListAllAsync()
-        {
-            return await _dbContext.Set<T>().ToListAsync();
-        }
+    public async virtual Task<IReadOnlyList<T>> GetPagedReponseAsync(int page, int size)
+    {
+        return await _dbContext.Set<T>().Skip((page - 1) * size).Take(size).AsNoTracking().ToListAsync();
+    }
 
-        public async virtual Task<IReadOnlyList<T>> GetPagedReponseAsync(int page, int size)
-        {
-            return await _dbContext.Set<T>().Skip((page - 1) * size).Take(size).AsNoTracking().ToListAsync();
-        }
+    public async Task<T> AddAsync(T entity)
+    {
+        await _dbContext.Set<T>().AddAsync(entity);
+        await _dbContext.SaveChangesAsync();
 
-        public async Task<T> AddAsync(T entity)
-        {
-            await _dbContext.Set<T>().AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+        return entity;
+    }
 
-            return entity;
-        }
+    public async Task UpdateAsync(T entity)
+    {
+        _dbContext.Entry(entity).State = EntityState.Modified;
+        await _dbContext.SaveChangesAsync();
+    }
 
-        public async Task UpdateAsync(T entity)
-        {
-            _dbContext.Entry(entity).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
-        }
-
-        public async Task DeleteAsync(T entity)
-        {
-            _dbContext.Set<T>().Remove(entity);
-            await _dbContext.SaveChangesAsync();
-        }
+    public async Task DeleteAsync(T entity)
+    {
+        _dbContext.Set<T>().Remove(entity);
+        await _dbContext.SaveChangesAsync();
     }
 }
