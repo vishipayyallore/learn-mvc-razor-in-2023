@@ -7,9 +7,9 @@ public class ProductRepository : IProductRepository
 {
     private readonly List<Product> _products = new()
     {
-        new Product { Id = 1, Name = "Americano", Price = 10.01M, Detail = "Coffee Americano", IsTrendingProduct = false, ImageUrl = "https://unsplash.com/photos/nzyzAUsbV0M" },
-        new Product { Id = 2, Name = "Cortado", Price = 10.01M, Detail = "Coffee Cortado", IsTrendingProduct = true, ImageUrl = "https://unsplash.com/photos/6VhPY27jdps" },
-        new Product { Id = 3, Name = "Mocha", Price = 10.01M, Detail = "Coffee Mocha", IsTrendingProduct = true, ImageUrl = "https://unsplash.com/photos/IhqDpFz7I8Q" }
+        new Product { Id = 1, Name = "Americano", Price = 10.01M, Detail = "Coffee Americano", IsTrendingProduct = false, ImageUrl = "https://images.unsplash.com/photo-1511920170033-f8396924c348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Q29mZmVlfGVufDB8fDB8fHwy&auto=format&fit=crop&w=500&q=60" },
+        new Product { Id = 2, Name = "Cortado", Price = 10.01M, Detail = "Coffee Cortado", IsTrendingProduct = true, ImageUrl = "https://images.unsplash.com/photo-1511920170033-f8396924c348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Q29mZmVlfGVufDB8fDB8fHwy&auto=format&fit=crop&w=500&q=60" },
+        new Product { Id = 3, Name = "Mocha", Price = 10.01M, Detail = "Coffee Mocha", IsTrendingProduct = true, ImageUrl = "https://images.unsplash.com/photo-1511920170033-f8396924c348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Q29mZmVlfGVufDB8fDB8fHwy&auto=format&fit=crop&w=500&q=60" }
     };
 
     //private CoffeeShopDbContext dbContext;
