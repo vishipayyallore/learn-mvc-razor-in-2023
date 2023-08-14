@@ -1,7 +1,12 @@
+using Coffee.eShop.ApplicationCore.Interfaces;
+using Coffee.eShop.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
 
