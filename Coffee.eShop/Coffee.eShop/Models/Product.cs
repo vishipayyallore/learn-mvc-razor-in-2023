@@ -1,4 +1,4 @@
-﻿namespace Coffee.eShop.Entities;
+﻿namespace Coffee.eShop.Models;
 
 public class Product
 {
