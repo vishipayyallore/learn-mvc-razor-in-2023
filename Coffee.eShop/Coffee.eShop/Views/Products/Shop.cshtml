@@ -1,24 +1,17 @@
-﻿@using Coffee.eShop.Models;
+﻿@model IEnumerable<Product>
 
-@model IEnumerable<Product>
+<h1>Coffee Shop</h1>
 
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <title>Coffee Shop</title>
-</head>
-<body>
-
-    <h1>Coffee Shop</h1>
-
-    @foreach (var item in Model)
-    {
-        <img height="100" width="100" src="@item.ImageUrl" />
+@foreach (var item in Model)
+{
+    <img height="100" width="100" src="@item.ImageUrl" />
+    <a asp-controller="Products" asp-action="Detail" asp-route-id="@item.Id">
         <h3>@item.Name</h3>
-        <p>@item.Detail</p>
-    }
-</body>
-</html>
+    </a>
+    <p>@item.Price.ToString("c")</p>
+}
 
+@* @{
+    Layout = "_Layout";
+}
+ *@

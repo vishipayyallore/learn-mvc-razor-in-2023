@@ -20,10 +20,12 @@ public class ProductsController : Controller
     public IActionResult Detail(int id)
     {
         var product = _productRepository.GetProductDetail(id);
-        if (product == null)
+
+        if (product is null)
         {
             return NotFound();
         }
+
         return View(product);
     }
 }
