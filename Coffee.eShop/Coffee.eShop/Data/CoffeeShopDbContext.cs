@@ -14,7 +14,9 @@ public class CoffeeShopDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<Product>().HasData(GetProducts());
+
+        modelBuilder.Entity<Product>()
+                    .HasData(GetProducts());
     }
 
     private static Product[] GetProducts() => new Product[]
