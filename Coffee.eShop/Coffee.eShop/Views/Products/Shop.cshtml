@@ -1,11 +1,5 @@
-﻿@using Coffee.eShop.Models;
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@model IEnumerable<Product>
 
-@model IEnumerable<Product>
-
-@{
-    Layout = "_Layout";
-}
 
 <h1>Coffee Shop</h1>
 
@@ -17,3 +11,8 @@
     </a>
     <p>@item.Price.ToString("c")</p>
 }
+
+@* @{
+    Layout = "_Layout";
+}
+ *@
