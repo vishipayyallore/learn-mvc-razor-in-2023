@@ -16,6 +16,10 @@ public class CoffeeShopDbContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<Product>()
+                    .Property(b => b.Price)
+                    .HasPrecision(18, 2);
+
+        modelBuilder.Entity<Product>()
                     .HasData(GetProducts());
     }
 
