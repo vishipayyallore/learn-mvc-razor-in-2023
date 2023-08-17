@@ -1,6 +1,4 @@
-﻿@model IEnumerable<Product>
-
-<h1>Coffee Shop</h1>
+﻿<h1>Coffee Shop</h1>
 
 <section data-bs-version="5.1" class="info3 cid-tsEY2vwh5a mbr-parallax-background" id="info3-b">
 
@@ -27,12 +25,31 @@
 
 <section data-bs-version="5.1" class="content2 cid-tsEZVFGbrL" id="content2-g">
 
-
     <div class="container">
         <div class="mbr-section-head">
 
             <h5 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 mt-2 display-5">The secret to a perfect cup , every time...</h5>
         </div>
+
+        <partial name="_ProductCard"></partial>
+
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="footer7 cid-tsQdrs3Vrj" once="footers" id="footer7-13">
+    <div class="container">
+        <div class="media-container-row align-center mbr-white">
+            <div class="col-12">
+                <p class="mbr-text mb-0 mbr-fonts-style display-7">
+                    © Copyright 2025&nbsp; - All Rights Reserved
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@*
         <div class="row mt-4">
             @foreach (var item in Model)
             {
@@ -52,17 +69,4 @@
                 </div>
             }
         </div>
-    </div>
-</section>
-<section data-bs-version="5.1" class="footer7 cid-tsQdrs3Vrj" once="footers" id="footer7-13">
-    <div class="container">
-        <div class="media-container-row align-center mbr-white">
-            <div class="col-12">
-                <p class="mbr-text mb-0 mbr-fonts-style display-7">
-                    © Copyright 2025&nbsp; - All Rights Reserved
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
+ *@
