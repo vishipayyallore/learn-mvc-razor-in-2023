@@ -2,21 +2,11 @@
 
 <h1>Coffee Shop</h1>
 
-@foreach (var item in Model)
-{
-    <img height="100" width="100" src="@item.ImageUrl" />
-    <a asp-controller="Products" asp-action="Detail" asp-route-id="@item.Id">
-        <h3>@item.Name</h3>
-    </a>
-    <p>@item.Price.ToString("c")</p>
-}
-
 <section data-bs-version="5.1" class="info3 cid-tsEY2vwh5a mbr-parallax-background" id="info3-b">
 
     <div class="mbr-overlay" style="opacity:0.9; background-image: url('https://images.unsplash.com/photo-1580933073521-dc49ac0d4e6a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2000&q=80');"></div>
 
     <div class="mbr-overlay" style="opacity: 0.7; background-color: rgb(0, 0, 0);"></div>
-
 
     <div class="container">
         <div class="row justify-content-center">
