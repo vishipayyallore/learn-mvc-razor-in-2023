@@ -11,8 +11,9 @@ public class ShoppingCartController : Controller
 
     public ShoppingCartController(IShoppingCartRepository shoppingCartRepository, IProductRepository productRepository)
     {
-        _shoppingCartRepository = shoppingCartRepository;
-        _productRepository = productRepository;
+        _shoppingCartRepository = shoppingCartRepository ?? throw new ArgumentNullException(nameof(shoppingCartRepository));
+
+        _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
     }
 
     public IActionResult Index()

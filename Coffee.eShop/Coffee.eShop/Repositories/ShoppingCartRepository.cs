@@ -13,9 +13,9 @@ public class ShoppingCartRepository : IShoppingCartRepository
 
     public string? ShoppingCartId { get; set; }
 
-    public ShoppingCartRepository(CoffeeShopDbContext dbContext)
+    public ShoppingCartRepository(CoffeeShopDbContext coffeeShopDbContext)
     {
-        _coffeeShopDbContext = dbContext;
+        _coffeeShopDbContext = coffeeShopDbContext ?? throw new ArgumentNullException(nameof(coffeeShopDbContext));
     }
 
     public static ShoppingCartRepository GetCart(IServiceProvider services)
