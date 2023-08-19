@@ -31,11 +31,12 @@ public class ShoppingCartRepository : IShoppingCartRepository
         return new ShoppingCartRepository(context) { ShoppingCartId = cartId };
     }
 
-
     public void AddToCart(Product product)
     {
-        var shoppingCartItem = _coffeeShopDbContext.ShoppingCartItems.FirstOrDefault(s => s.Product.Id == product.Id && s.ShoppingCartId == ShoppingCartId);
-        if (shoppingCartItem == null)
+        var shoppingCartItem = _coffeeShopDbContext.ShoppingCartItems
+            .FirstOrDefault(s => s.Product!.Id == product.Id && s.ShoppingCartId == ShoppingCartId);
+
+        if (shoppingCartItem is null)
         {
             shoppingCartItem = new ShoppingCartItem
             {
@@ -43,13 +44,15 @@ public class ShoppingCartRepository : IShoppingCartRepository
                 Product = product,
                 Qty = 1
             };
+
             _coffeeShopDbContext.ShoppingCartItems.Add(shoppingCartItem);
         }
         else
         {
             shoppingCartItem.Qty++;
         }
-        _coffeeShopDbContext.SaveChanges();
+
+        _coffeeShopDbContext.SaveChangesAsync();
     }
 
     public void ClearCart()
