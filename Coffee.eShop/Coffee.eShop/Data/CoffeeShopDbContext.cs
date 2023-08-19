@@ -7,6 +7,8 @@ public class CoffeeShopDbContext : DbContext
 {
     public DbSet<Product> Products { get; set; }
 
+    public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
+
     public CoffeeShopDbContext(DbContextOptions<CoffeeShopDbContext> options) : base(options)
     {
     }
