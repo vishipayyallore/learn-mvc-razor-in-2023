@@ -52,7 +52,7 @@ public class ShoppingCartRepository : IShoppingCartRepository
             shoppingCartItem.Qty++;
         }
 
-        _coffeeShopDbContext.SaveChangesAsync();
+        _coffeeShopDbContext.SaveChanges();
     }
 
     public void ClearCart()
