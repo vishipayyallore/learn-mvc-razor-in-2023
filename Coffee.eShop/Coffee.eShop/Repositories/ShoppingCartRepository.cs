@@ -77,10 +77,12 @@ public class ShoppingCartRepository : IShoppingCartRepository
 
     public int RemoveFromCart(Product product)
     {
-        var shoppingCartItem = _coffeeShopDbContext.ShoppingCartItems.FirstOrDefault(s => s.Product.Id == product.Id && s.ShoppingCartId == ShoppingCartId);
         var quantity = 0;
 
-        if (shoppingCartItem != null)
+        var shoppingCartItem = _coffeeShopDbContext.ShoppingCartItems
+                .FirstOrDefault(s => s.Product!.Id == product.Id && s.ShoppingCartId == ShoppingCartId);
+
+        if (shoppingCartItem is not null)
         {
             if (shoppingCartItem.Qty > 1)
             {
@@ -92,7 +94,10 @@ public class ShoppingCartRepository : IShoppingCartRepository
                 _coffeeShopDbContext.ShoppingCartItems.Remove(shoppingCartItem);
             }
         }
+
         _coffeeShopDbContext.SaveChanges();
+
         return quantity;
     }
+
 }
