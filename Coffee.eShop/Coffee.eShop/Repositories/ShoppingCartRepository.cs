@@ -57,21 +57,26 @@ public class ShoppingCartRepository : IShoppingCartRepository
 
     public void ClearCart()
     {
-        var cartItems = _coffeeShopDbContext.ShoppingCartItems.Where(s => s.ShoppingCartId == ShoppingCartId);
+        var cartItems = _coffeeShopDbContext.ShoppingCartItems
+                        .Where(s => s.ShoppingCartId == ShoppingCartId);
+
         _coffeeShopDbContext.ShoppingCartItems.RemoveRange(cartItems);
+
         _coffeeShopDbContext.SaveChanges();
     }
 
     public List<ShoppingCartItem> GetShoppingCartItems()
     {
-        return ShoppingCartItems ??= _coffeeShopDbContext.ShoppingCartItems.Where(s => s.ShoppingCartId == ShoppingCartId)
-             .Include(p => p.Product).ToList();
+        return ShoppingCartItems ??= _coffeeShopDbContext.ShoppingCartItems
+            .Where(s => s.ShoppingCartId == ShoppingCartId).Include(p => p.Product).ToList();
     }
 
     public decimal GetShoppingCartTotal()
     {
-        var totalCost = _coffeeShopDbContext.ShoppingCartItems.Where(s => s.ShoppingCartId == ShoppingCartId)
-              .Select(s => s.Product.Price * s.Qty).Sum();
+        var totalCost = _coffeeShopDbContext.ShoppingCartItems
+                .Where(s => s.ShoppingCartId == ShoppingCartId)
+                .Select(s => s.Product!.Price * s.Qty).Sum();
+
         return totalCost;
     }
 
