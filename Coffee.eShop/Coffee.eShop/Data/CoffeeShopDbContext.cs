@@ -9,6 +9,10 @@ public class CoffeeShopDbContext : DbContext
 
     public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
 
+    public DbSet<Order> Orders { get; set; }
+
+    public DbSet<OrderDetail> OrderDetails { get; set; }
+
     public CoffeeShopDbContext(DbContextOptions<CoffeeShopDbContext> options) : base(options)
     {
     }
