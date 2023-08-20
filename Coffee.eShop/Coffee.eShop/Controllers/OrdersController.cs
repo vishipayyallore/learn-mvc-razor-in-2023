@@ -16,11 +16,6 @@ public class OrdersController : Controller
         _shopCartRepository = shopCartRepository ?? throw new ArgumentNullException(nameof(shopCartRepository));
     }
 
-    public IActionResult Index()
-    {
-        return View();
-    }
-
     public IActionResult Checkout()
     {
         return View();
