@@ -1,7 +1,6 @@
 ﻿using Coffee.eShop.ApplicationCore.Interfaces;
 using Coffee.eShop.Data;
 using Coffee.eShop.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Coffee.eShop.Repositories;
 
@@ -13,23 +12,23 @@ public class OrderRepository : IOrderRepository
     public OrderRepository(CoffeeShopDbContext coffeeShopDbContext, IShoppingCartRepository shoppingCartRepository)
     {
         _coffeeShopDbContext = coffeeShopDbContext ?? throw new ArgumentNullException(nameof(coffeeShopDbContext));
-        
+
         _shoppingCartRepository = shoppingCartRepository ?? throw new ArgumentNullException(nameof(shoppingCartRepository));
     }
 
     public void PlaceOrder(Order order)
     {
-        order.OrderDetails = new List<OrderDetail>();
+        order.OrderDetails = new();
 
         var shoppingCartItems = _shoppingCartRepository.GetShoppingCartItems();
-        
+
         foreach (var item in shoppingCartItems)
         {
             var orderDetail = new OrderDetail
             {
                 Quantity = item.Qty,
-                ProductId = item.Product!.Id,
-                Price = item.Product.Price
+                ProductId = item.Product is not null ? item.Product.Id : 0,
+                Price = item.Product!.Price
             };
             order.OrderDetails.Add(orderDetail);
         }
