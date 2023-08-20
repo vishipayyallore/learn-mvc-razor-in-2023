@@ -4,6 +4,7 @@ using Coffee.eShop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Coffee.eShop.Migrations
 {
     [DbContext(typeof(CoffeeShopDbContext))]
-    partial class CoffeeShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230820150039_AddedOrders")]
+    partial class AddedOrders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,7 +49,6 @@ namespace Coffee.eShop.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("OrderTotal")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Phone")
@@ -69,7 +71,6 @@ namespace Coffee.eShop.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("ProductId")
