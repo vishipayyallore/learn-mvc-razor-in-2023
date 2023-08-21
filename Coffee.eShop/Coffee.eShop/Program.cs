@@ -1,8 +1,8 @@
 using Coffee.eShop.ApplicationCore.Interfaces;
 using Coffee.eShop.Data;
 using Coffee.eShop.Repositories;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
