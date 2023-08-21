@@ -1,9 +1,10 @@
 ﻿using Coffee.eShop.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Coffee.eShop.Data;
 
-public class CoffeeShopDbContext : DbContext
+public class CoffeeShopDbContext : IdentityDbContext
 {
     public DbSet<Product> Products { get; set; }
 
