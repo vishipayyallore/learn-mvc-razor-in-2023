@@ -9,6 +9,10 @@ public class CoffeeShopDbContext : DbContext
 
     public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
 
+    public DbSet<Order> Orders { get; set; }
+
+    public DbSet<OrderDetail> OrderDetails { get; set; }
+
     public CoffeeShopDbContext(DbContextOptions<CoffeeShopDbContext> options) : base(options)
     {
     }
@@ -18,6 +22,14 @@ public class CoffeeShopDbContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<Product>()
+                    .Property(b => b.Price)
+                    .HasPrecision(18, 2);
+
+        modelBuilder.Entity<Order>()
+                    .Property(b => b.OrderTotal)
+                    .HasPrecision(18, 2);
+
+        modelBuilder.Entity<OrderDetail>()
                     .Property(b => b.Price)
                     .HasPrecision(18, 2);
 
