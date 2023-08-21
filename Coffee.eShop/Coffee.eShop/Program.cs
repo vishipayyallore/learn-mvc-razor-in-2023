@@ -20,7 +20,7 @@ builder.Services.AddDbContext<CoffeeShopDbContext>(options =>
     _ = options.UseSqlServer(builder.Configuration.GetConnectionString("CoffeeShopConnectionString"));
 });
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<CoffeeShopDbContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<CoffeeShopDbContext>();
 
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
