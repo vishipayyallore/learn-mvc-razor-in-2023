@@ -1,6 +1,7 @@
 using Coffee.eShop.ApplicationCore.Interfaces;
 using Coffee.eShop.Data;
 using Coffee.eShop.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,8 @@ builder.Services.AddDbContext<CoffeeShopDbContext>(options =>
 {
     _ = options.UseSqlServer(builder.Configuration.GetConnectionString("CoffeeShopConnectionString"));
 });
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<CoffeeShopDbContext>();
 
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
