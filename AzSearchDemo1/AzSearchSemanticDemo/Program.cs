@@ -23,29 +23,36 @@ AzureKeyCredential credential = new(apiKey);
 SearchIndexClient adminClient = new(serviceEndpoint, credential);
 
 // Create a SearchClient to load and query documents
-SearchClient srchclient = new SearchClient(serviceEndpoint, indexName, credential);
+SearchClient srchclient = new(serviceEndpoint, indexName, credential);
 
+Console.ForegroundColor = ConsoleColor.Red;
 // Delete index if it exists
 Console.WriteLine("{0}", "Deleting index...\n");
 DeleteIndexIfExists(indexName, adminClient);
 
+Console.ForegroundColor = ConsoleColor.Green;
 // Create index
 Console.WriteLine("{0}", "Creating index...\n");
 CreateIndex(indexName, adminClient);
 
 SearchClient ingesterClient = adminClient.GetSearchClient(indexName);
 
+Console.ForegroundColor = ConsoleColor.Yellow;
 // Load documents
 Console.WriteLine("{0}", "Uploading documents...\n");
 UploadDocuments(ingesterClient);
 
+Console.ForegroundColor = ConsoleColor.DarkMagenta;
 // Wait 2 secondsfor indexing to complete before starting queries (for demo and console-app purposes only)
 Console.WriteLine("Waiting for indexing...\n");
 System.Threading.Thread.Sleep(2000);
 
+Console.ForegroundColor = ConsoleColor.Cyan;
 // Call the RunQueries method to invoke a series of queries
 Console.WriteLine("Starting queries...\n");
 RunQueries(srchclient);
+
+Console.ResetColor();
 
 // End the program
 Console.WriteLine("{0}", "Complete. Press any key to end this program...\n");
