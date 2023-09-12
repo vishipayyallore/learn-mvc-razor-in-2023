@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34004.107
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzSearchDemo1", "AzSearchDemo1\AzSearchDemo1.csproj", "{03458B9D-8516-4B47-A4BD-5D6D7A3E5280}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03458B9D-8516-4B47-A4BD-5D6D7A3E5280}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03458B9D-8516-4B47-A4BD-5D6D7A3E5280}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03458B9D-8516-4B47-A4BD-5D6D7A3E5280}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03458B9D-8516-4B47-A4BD-5D6D7A3E5280}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {41C8C0AC-63BE-4CCA-B92E-52A11F42C061}
+	EndGlobalSection
+EndGlobal
