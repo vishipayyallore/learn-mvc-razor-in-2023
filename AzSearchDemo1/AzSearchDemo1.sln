@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34004.107
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzSearchDemo1", "AzSearchDemo1\AzSearchDemo1.csproj", "{03458B9D-8516-4B47-A4BD-5D6D7A3E5280}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzSearchSemanticDemo", "AzSearchSemanticDemo\AzSearchSemanticDemo.csproj", "{9A4A7B44-27B7-462F-8EC4-CC1E4046D293}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{03458B9D-8516-4B47-A4BD-5D6D7A3E5280}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03458B9D-8516-4B47-A4BD-5D6D7A3E5280}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03458B9D-8516-4B47-A4BD-5D6D7A3E5280}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A4A7B44-27B7-462F-8EC4-CC1E4046D293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A4A7B44-27B7-462F-8EC4-CC1E4046D293}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A4A7B44-27B7-462F-8EC4-CC1E4046D293}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A4A7B44-27B7-462F-8EC4-CC1E4046D293}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
