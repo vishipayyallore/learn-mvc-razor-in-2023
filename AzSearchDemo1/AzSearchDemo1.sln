@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34004.107
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzSearchDemo1", "AzSearchDemo1\AzSearchDemo1.csproj", "{03458B9D-8516-4B47-A4BD-5D6D7A3E5280}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzSearchFullTextDemo", "AzSearchDemo1\AzSearchFullTextDemo.csproj", "{03458B9D-8516-4B47-A4BD-5D6D7A3E5280}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzSearchSemanticDemo", "AzSearchSemanticDemo\AzSearchSemanticDemo.csproj", "{9A4A7B44-27B7-462F-8EC4-CC1E4046D293}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzSearchSemanticDemo", "AzSearchSemanticDemo\AzSearchSemanticDemo.csproj", "{9A4A7B44-27B7-462F-8EC4-CC1E4046D293}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
