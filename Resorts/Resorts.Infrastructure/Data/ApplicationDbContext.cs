@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Resorts.Domain.Entities;
 
 namespace Resorts.Infrastructure.Data;
 
@@ -8,4 +9,5 @@ public class ApplicationDbContext : DbContext
     {
     }
 
+    public DbSet<Villa> Villas => Set<Villa>();
 }
