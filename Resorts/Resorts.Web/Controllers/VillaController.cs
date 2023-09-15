@@ -18,4 +18,10 @@ public class VillaController : Controller
 
         return View(villas);
     }
+
+    public IActionResult Create()
+    {
+        return View();
+    }
+
 }
