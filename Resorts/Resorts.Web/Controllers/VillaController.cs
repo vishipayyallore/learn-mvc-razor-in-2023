@@ -16,6 +16,6 @@ public class VillaController : Controller
     {
         var villas = _dbContext.Villas;
 
-        return View();
+        return View(villas);
     }
 }
