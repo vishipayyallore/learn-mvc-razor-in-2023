@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using ResortsWeb.Models;
+using Resorts.Web.Models;
 using System.Diagnostics;
 
-namespace ResortsWeb.Controllers
+namespace Resorts.Web.Controllers
 {
     public class HomeController : Controller
     {

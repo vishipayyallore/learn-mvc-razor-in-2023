@@ -1,4 +1,4 @@
-namespace ResortsWeb.Models
+namespace Resorts.Web.Models
 {
     public class ErrorViewModel
     {
