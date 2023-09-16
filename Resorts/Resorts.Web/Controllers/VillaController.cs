@@ -4,14 +4,10 @@ using Resorts.Infrastructure.Data;
 
 namespace Resorts.Web.Controllers;
 
-public class VillaController : Controller
+// Primary Constructor
+public class VillaController(ApplicationDbContext dbContext) : Controller
 {
-    private readonly ApplicationDbContext _dbContext;
-
-    public VillaController(ApplicationDbContext dbContext)
-    {
-        _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
-    }
+    private readonly ApplicationDbContext _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
 
     public IActionResult Index()
     {
@@ -82,21 +78,20 @@ public class VillaController : Controller
         return View(villa);
     }
 
+    [HttpPost]
+    public IActionResult Delete(Villa villa)
+    {
+        Villa? existingVilla = _dbContext.Villas.FirstOrDefault(x => x.Id == villa.Id);
 
-    //[HttpPost]
-    //public IActionResult Delete(Villa obj)
-    //{
-    //    bool deleted = _villaService.DeleteVilla(obj.Id);
-    //    if (deleted)
-    //    {
-    //        TempData["success"] = "The villa has been deleted successfully.";
-    //        return RedirectToAction(nameof(Index));
-    //    }
-    //    else
-    //    {
-    //        TempData["error"] = "Failed to delete the villa.";
-    //    }
-    //    return View();
-    //}
+        if (existingVilla is not null)
+        {
+            _dbContext.Villas.Remove(existingVilla);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        return View(villa);
+    }
 
 }
