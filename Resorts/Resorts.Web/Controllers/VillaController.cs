@@ -70,15 +70,17 @@ public class VillaController : Controller
         return View(villa);
     }
 
-    //public IActionResult Delete(int villaId)
-    //{
-    //    Villa? obj = _villaService.GetVillaById(villaId);
-    //    if (obj is null)
-    //    {
-    //        return RedirectToAction("Error", "Home");
-    //    }
-    //    return View(obj);
-    //}
+    public IActionResult Delete(int villaId)
+    {
+        Villa? villa = _dbContext.Villas.FirstOrDefault(x => x.Id == villaId);
+
+        if (villa is null)
+        {
+            return RedirectToAction("Error", "Home");
+        }
+
+        return View(villa);
+    }
 
 
     //[HttpPost]
