@@ -28,23 +28,20 @@ public class VillaController : Controller
     [HttpPost]
     public IActionResult Create(Villa villa)
     {
-        _dbContext.Villas.Add(villa);
-        _dbContext.SaveChanges();
+        if (villa.Name == villa.Description)
+        {
+            ModelState.AddModelError("name", "The description cannot exactly match the Name.");
+        }
 
-        return RedirectToAction(nameof(Index));
+        if (ModelState.IsValid)
+        {
+            _dbContext.Villas.Add(villa);
+            _dbContext.SaveChanges();
 
-        //if (obj.Name == obj.Description)
-        //{
-        //    ModelState.AddModelError("name", "The description cannot exactly match the Name.");
-        //}
-        //if (ModelState.IsValid)
-        //{
+            return RedirectToAction(nameof(Index));
+        }
 
-        //    _villaService.CreateVilla(obj);
-        //    TempData["success"] = "The villa has been created successfully.";
-        //    return RedirectToAction(nameof(Index));
-        //}
-        // return View();
+        return View(villa);
     }
 
 }

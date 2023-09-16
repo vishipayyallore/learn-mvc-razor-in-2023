@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Resorts.Domain.Entities;
 
@@ -20,16 +21,15 @@ public class Villa
     [Range(1, 10)]
     public int Occupancy { get; set; }
 
+    // [NotMapped]
+    // public IFormFile? Image { get; set; }
+
     [Display(Name = "Image Url")]
     public string? ImageUrl { get; set; }
 
     public DateTime? Created_Date { get; set; }
 
     public DateTime? Updated_Date { get; set; }
-
-    //[NotMapped]
-    //public IFormFile? Image { get; set; }
-    //[Display(Name = "Image Url")]
 
     //[ValidateNever]
     //public IEnumerable<Amenity> VillaAmenity { get; set; }
