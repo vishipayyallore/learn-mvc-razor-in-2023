@@ -50,24 +50,25 @@ public class VillaController : Controller
 
         if (villa is null)
         {
-            return NotFound();
+            return RedirectToAction("Error", "Home");
         }
 
         return View(villa);
     }
 
-    //[HttpPost]
-    //public IActionResult Update(Villa obj)
-    //{
-    //    if (ModelState.IsValid && obj.Id > 0)
-    //    {
+    [HttpPost]
+    public IActionResult Update(Villa villa)
+    {
+        if (ModelState.IsValid && villa.Id > 0)
+        {
+            _dbContext.Villas.Update(villa);
+            _dbContext.SaveChanges();
 
-    //        _villaService.UpdateVilla(obj);
-    //        TempData["success"] = "The villa has been updated successfully.";
-    //        return RedirectToAction(nameof(Index));
-    //    }
-    //    return View();
-    //}
+            return RedirectToAction(nameof(Index));
+        }
+
+        return View(villa);
+    }
 
     //public IActionResult Delete(int villaId)
     //{
