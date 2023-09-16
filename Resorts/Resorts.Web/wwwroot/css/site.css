@@ -32,3 +32,7 @@ body {
     .navbar-nav .nav-link:hover {
         color: greenyellow !important; /* Change to the color you prefer */
     }
+
+.footer-overrides {
+    height: 30px;
+}
