@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Resorts.Domain.Entities;
 using Resorts.Infrastructure.Data;
 
 namespace Resorts.Web.Controllers;
@@ -22,6 +23,28 @@ public class VillaController : Controller
     public IActionResult Create()
     {
         return View();
+    }
+
+    [HttpPost]
+    public IActionResult Create(Villa villa)
+    {
+        _dbContext.Villas.Add(villa);
+        _dbContext.SaveChanges();
+
+        return RedirectToAction(nameof(Index));
+
+        //if (obj.Name == obj.Description)
+        //{
+        //    ModelState.AddModelError("name", "The description cannot exactly match the Name.");
+        //}
+        //if (ModelState.IsValid)
+        //{
+
+        //    _villaService.CreateVilla(obj);
+        //    TempData["success"] = "The villa has been created successfully.";
+        //    return RedirectToAction(nameof(Index));
+        //}
+        // return View();
     }
 
 }
