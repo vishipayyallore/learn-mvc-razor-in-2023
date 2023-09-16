@@ -33,6 +33,6 @@ body {
         color: greenyellow !important; /* Change to the color you prefer */
     }
 
-.footer-overrides {
-    height: 30px;
+.footer {
+    line-height: 30px !important;
 }
