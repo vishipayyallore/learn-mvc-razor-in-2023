@@ -37,38 +37,8 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-
-            <!--Version 1-->
-            @*             @if (TempData["error"] is not null)
-            {
-            <div class="text-danger h-3">@TempData["error"]</div>
-            }
-
-            @if (TempData["success"] is not null)
-            {
-            <div class="text-success h-3">@TempData["success"]</div>
-            }
-            *@
-
-
-            @if (TempData["error"] is not null)
-            {
-                <script src="~/lib/jquery/dist/jquery.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-                <script type="text/javascript">
-                    toastr.error('@TempData["error"]');
-                </script>
-            }
-
-            @if (TempData["success"] is not null)
-            {
-                <script src="~/lib/jquery/dist/jquery.min.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-                <script type="text/javascript">
-                    toastr.success('@TempData["success"]');
-                </script>
-            }
-
+            <!-- Version 3-->
+            <partial name="_Notification" />
             @RenderBody()
         </main>
     </div>
@@ -85,3 +55,36 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+<!--Version 1-->
+@*             @if (TempData["error"] is not null)
+            {
+            <div class="text-danger h-3">@TempData["error"]</div>
+            }
+
+            @if (TempData["success"] is not null)
+            {
+            <div class="text-success h-3">@TempData["success"]</div>
+            }
+            *@
+
+<!--Version 2-->
+@*             @if (TempData["error"] is not null)
+            {
+                <script src="~/lib/jquery/dist/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script type="text/javascript">
+                    toastr.error('@TempData["error"]');
+                </script>
+            }
+
+            @if (TempData["success"] is not null)
+            {
+                <script src="~/lib/jquery/dist/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script type="text/javascript">
+                    toastr.success('@TempData["success"]');
+                </script>
+            }
+ *@
