@@ -23,6 +23,9 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
     [HttpPost]
     public IActionResult Create(VillaNumber villaNumber)
     {
+        // Method 1
+        // ModelState.Remove("Villa");
+
         if (ModelState.IsValid)
         {
             _dbContext.VillaNumbers.Add(villaNumber);
