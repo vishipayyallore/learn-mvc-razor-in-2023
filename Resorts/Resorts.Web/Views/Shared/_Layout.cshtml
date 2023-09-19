@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/Resorts.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">Resorts.Web</a>
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/resort.png" style="width:35px" /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -36,13 +37,15 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            <!-- Version 3-->
+            <partial name="_Notification" />
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-white bg-secondary">
         <div class="container">
-            &copy; 2023 - Resorts.Web - <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            Made with <i class="bi bi-heart-fill"></i> | &copy; 2023 - Resorts Web | <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
 
@@ -52,3 +55,36 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+<!--Version 1-->
+@*             @if (TempData["error"] is not null)
+            {
+            <div class="text-danger h-3">@TempData["error"]</div>
+            }
+
+            @if (TempData["success"] is not null)
+            {
+            <div class="text-success h-3">@TempData["success"]</div>
+            }
+            *@
+
+<!--Version 2-->
+@*             @if (TempData["error"] is not null)
+            {
+                <script src="~/lib/jquery/dist/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script type="text/javascript">
+                    toastr.error('@TempData["error"]');
+                </script>
+            }
+
+            @if (TempData["success"] is not null)
+            {
+                <script src="~/lib/jquery/dist/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script type="text/javascript">
+                    toastr.success('@TempData["success"]');
+                </script>
+            }
+ *@
