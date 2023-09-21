@@ -18,11 +18,14 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
 
     public IActionResult Create()
     {
-        IEnumerable<SelectListItem> selectList = _dbContext.Villas.Select(r => new SelectListItem
+        IEnumerable<SelectListItem> villaList = _dbContext.Villas.Select(r => new SelectListItem
         {
             Text = r.Name,
             Value = $"{r.Id}",
         });
+
+        // ViewData is Dictionary
+        ViewData["VillaList"] = villaList;
 
         return View();
     }
