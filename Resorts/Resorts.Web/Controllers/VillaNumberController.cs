@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Resorts.Domain.Entities;
 using Resorts.Infrastructure.Data;
 
@@ -17,6 +18,12 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
 
     public IActionResult Create()
     {
+        IEnumerable<SelectListItem> selectList = _dbContext.Villas.Select(r => new SelectListItem
+        {
+            Text = r.Name,
+            Value = $"{r.Id}",
+        });
+
         return View();
     }
 
