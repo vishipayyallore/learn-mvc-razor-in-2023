@@ -25,7 +25,10 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
         });
 
         // ViewData is Dictionary
-        ViewData["VillaList"] = villaList;
+        // ViewData["VillaList"] = villaList;
+
+        // ViewBag is Dynamic Type
+        ViewBag.VillaList = villaList;
 
         return View();
     }
