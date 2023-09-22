@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Resorts.Domain.Entities;
 using Resorts.Infrastructure.Data;
 using Resorts.Web.ViewModels;
 
@@ -58,6 +57,8 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
         {
             TempData["error"] = "The Villa Number already exists.";
         }
+
+        villaNumberVM.VillaList = GetVillaList();
 
         return View(villaNumberVM);
     }
