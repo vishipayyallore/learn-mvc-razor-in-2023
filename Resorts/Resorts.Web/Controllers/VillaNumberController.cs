@@ -36,24 +36,17 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
         return View(villaNumberVM);
     }
 
-    private IEnumerable<SelectListItem> GetVillaList()
-    {
-        return _dbContext.Villas.Select(r => new SelectListItem
-        {
-            Text = r.Name,
-            Value = $"{r.Id}",
-        });
-    }
-
     [HttpPost]
-    public IActionResult Create(VillaNumber villaNumber)
+    public IActionResult Create(VillaNumberVM villaNumberVM)
     {
         // Method 1
         // ModelState.Remove("Villa");
 
-        if (ModelState.IsValid)
+        bool roomNumberExists = _dbContext.VillaNumbers.Any(r => r.Villa_Number == villaNumberVM.VillaNumber!.Villa_Number);
+
+        if (ModelState.IsValid && !roomNumberExists)
         {
-            _dbContext.VillaNumbers.Add(villaNumber);
+            _dbContext.VillaNumbers.Add(villaNumberVM.VillaNumber!);
             _dbContext.SaveChanges();
 
             TempData["success"] = "The Villa Number has been created successfully.";
@@ -61,7 +54,21 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
             return RedirectToAction(nameof(Index));
         }
 
-        return View(villaNumber);
+        if (roomNumberExists)
+        {
+            TempData["error"] = "The Villa Number already exists.";
+        }
+
+        return View(villaNumberVM);
+    }
+
+    private IEnumerable<SelectListItem> GetVillaList()
+    {
+        return _dbContext.Villas.Select(r => new SelectListItem
+        {
+            Text = r.Name,
+            Value = $"{r.Id}",
+        });
     }
 
 }
