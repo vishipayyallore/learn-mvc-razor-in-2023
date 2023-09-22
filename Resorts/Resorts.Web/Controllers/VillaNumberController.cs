@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Resorts.Domain.Entities;
 using Resorts.Infrastructure.Data;
 using Resorts.Web.ViewModels;
@@ -12,7 +13,7 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
 
     public IActionResult Index()
     {
-        var villaNumbers = _dbContext.VillaNumbers;
+        var villaNumbers = _dbContext.VillaNumbers.Include(r => r.Villa).ToList();
 
         return View(villaNumbers);
     }
