@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Resorts.Domain.Entities;
 using Resorts.Infrastructure.Data;
+using Resorts.Web.ViewModels;
 
 namespace Resorts.Web.Controllers;
 
@@ -18,19 +19,29 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
 
     public IActionResult Create()
     {
-        IEnumerable<SelectListItem> villaList = _dbContext.Villas.Select(r => new SelectListItem
-        {
-            Text = r.Name,
-            Value = $"{r.Id}",
-        });
+        //IEnumerable<SelectListItem> villaList = GetVillaList();
 
         // ViewData is Dictionary
         // ViewData["VillaList"] = villaList;
 
         // ViewBag is Dynamic Type
-        ViewBag.VillaList = villaList;
+        //ViewBag.VillaList = villaList;
 
-        return View();
+        VillaNumberVM villaNumberVM = new()
+        {
+            VillaList = GetVillaList()
+        };
+
+        return View(villaNumberVM);
+    }
+
+    private IEnumerable<SelectListItem> GetVillaList()
+    {
+        return _dbContext.Villas.Select(r => new SelectListItem
+        {
+            Text = r.Name,
+            Value = $"{r.Id}",
+        });
     }
 
     [HttpPost]
