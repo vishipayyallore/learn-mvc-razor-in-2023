@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Resorts.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Resorts.Infrastructure.Data;
+using Resorts.Web.ViewModels;
 
 namespace Resorts.Web.Controllers;
 
@@ -11,37 +12,40 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
 
     public IActionResult Index()
     {
-        var villaNumbers = _dbContext.VillaNumbers;
+        var villaNumbers = _dbContext.VillaNumbers.Include(r => r.Villa).ToList();
 
         return View(villaNumbers);
     }
 
     public IActionResult Create()
     {
-        IEnumerable<SelectListItem> villaList = _dbContext.Villas.Select(r => new SelectListItem
-        {
-            Text = r.Name,
-            Value = $"{r.Id}",
-        });
+        //IEnumerable<SelectListItem> villaList = GetVillaList();
 
         // ViewData is Dictionary
         // ViewData["VillaList"] = villaList;
 
         // ViewBag is Dynamic Type
-        ViewBag.VillaList = villaList;
+        //ViewBag.VillaList = villaList;
 
-        return View();
+        VillaNumberVM villaNumberVM = new()
+        {
+            VillaList = GetVillaList()
+        };
+
+        return View(villaNumberVM);
     }
 
     [HttpPost]
-    public IActionResult Create(VillaNumber villaNumber)
+    public IActionResult Create(VillaNumberVM villaNumberVM)
     {
         // Method 1
         // ModelState.Remove("Villa");
 
-        if (ModelState.IsValid)
+        bool roomNumberExists = _dbContext.VillaNumbers.Any(r => r.Villa_Number == villaNumberVM.VillaNumber!.Villa_Number);
+
+        if (ModelState.IsValid && !roomNumberExists)
         {
-            _dbContext.VillaNumbers.Add(villaNumber);
+            _dbContext.VillaNumbers.Add(villaNumberVM.VillaNumber!);
             _dbContext.SaveChanges();
 
             TempData["success"] = "The Villa Number has been created successfully.";
@@ -49,7 +53,23 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
             return RedirectToAction(nameof(Index));
         }
 
-        return View(villaNumber);
+        if (roomNumberExists)
+        {
+            TempData["error"] = "The Villa Number already exists.";
+        }
+
+        villaNumberVM.VillaList = GetVillaList();
+
+        return View(villaNumberVM);
+    }
+
+    private IEnumerable<SelectListItem> GetVillaList()
+    {
+        return _dbContext.Villas.Select(r => new SelectListItem
+        {
+            Text = r.Name,
+            Value = $"{r.Id}",
+        });
     }
 
 }
