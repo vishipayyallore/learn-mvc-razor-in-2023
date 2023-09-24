@@ -19,6 +19,7 @@ html {
 
 body {
     margin-bottom: 60px;
+    color: navy;
 }
 
 .navbar.navbar-light.bg-primary:hover {
@@ -35,4 +36,12 @@ body {
 
 .footer {
     line-height: 30px !important;
+}
+
+table td {
+    color: navy;
+}
+
+tr {
+    color: navy;
 }
