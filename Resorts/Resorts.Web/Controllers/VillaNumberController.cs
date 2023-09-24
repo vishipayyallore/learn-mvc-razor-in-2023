@@ -113,6 +113,26 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
         return View(villaNumberVM);
     }
 
+    [HttpPost]
+    public IActionResult Delete(VillaNumberVM villaNumberVM)
+    {
+        var existingVillaNumber = _dbContext.VillaNumbers.FirstOrDefault(r => r.Villa_Number == villaNumberVM.VillaNumber!.Villa_Number);
+
+        if (existingVillaNumber is not null)
+        {
+            _dbContext.VillaNumbers.Remove(existingVillaNumber);
+            _dbContext.SaveChanges();
+
+            TempData["success"] = "The Villa Number has been deleted successfully.";
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        TempData["error"] = "The Villa Number could not be deleted.";
+
+        return View(villaNumberVM);
+    }
+
     private IEnumerable<SelectListItem> GetVillaList()
     {
         return _dbContext.Villas.Select(r => new SelectListItem
