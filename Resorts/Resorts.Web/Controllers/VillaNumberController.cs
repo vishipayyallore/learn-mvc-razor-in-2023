@@ -71,7 +71,41 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
             VillaNumber = _dbContext.VillaNumbers.FirstOrDefault(r => r.Villa_Number == villaNumberId)
         };
 
-        if(villaNumberVM.VillaNumber is null)
+        if (villaNumberVM.VillaNumber is null)
+        {
+            return RedirectToAction("Error", "Home");
+        }
+
+        return View(villaNumberVM);
+    }
+
+    [HttpPost]
+    public IActionResult Update(VillaNumberVM villaNumberVM)
+    {
+        if (ModelState.IsValid)
+        {
+            _dbContext.VillaNumbers.Update(villaNumberVM.VillaNumber!);
+            _dbContext.SaveChanges();
+
+            TempData["success"] = "The Villa Number has been updated successfully.";
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        villaNumberVM.VillaList = GetVillaList();
+
+        return View(villaNumberVM);
+    }
+
+    public IActionResult Delete(int villaNumberId)
+    {
+        VillaNumberVM villaNumberVM = new()
+        {
+            VillaList = GetVillaList(),
+            VillaNumber = _dbContext.VillaNumbers.FirstOrDefault(r => r.Villa_Number == villaNumberId)
+        };
+
+        if (villaNumberVM.VillaNumber is null)
         {
             return RedirectToAction("Error", "Home");
         }
