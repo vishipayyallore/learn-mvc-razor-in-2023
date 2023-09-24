@@ -63,6 +63,22 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
         return View(villaNumberVM);
     }
 
+    public IActionResult Update(int villaNumberId)
+    {
+        VillaNumberVM villaNumberVM = new()
+        {
+            VillaList = GetVillaList(),
+            VillaNumber = _dbContext.VillaNumbers.FirstOrDefault(r => r.Villa_Number == villaNumberId)
+        };
+
+        if(villaNumberVM.VillaNumber is null)
+        {
+            return RedirectToAction("Error", "Home");
+        }
+
+        return View(villaNumberVM);
+    }
+
     private IEnumerable<SelectListItem> GetVillaList()
     {
         return _dbContext.Villas.Select(r => new SelectListItem
