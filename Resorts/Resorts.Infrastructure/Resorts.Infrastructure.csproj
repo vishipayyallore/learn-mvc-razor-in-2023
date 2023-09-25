@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Resorts.Application\Resorts.Application.csproj" />
     <ProjectReference Include="..\Resorts.Domain\Resorts.Domain.csproj" />
   </ItemGroup>
 
