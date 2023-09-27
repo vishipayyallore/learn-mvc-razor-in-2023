@@ -89,8 +89,8 @@ public class VillaController(IVillaRepository villaRepository) : Controller
 
         if (existingVilla is not null)
         {
-            _dbContext.Villas.Remove(existingVilla);
-            _dbContext.SaveChanges();
+            _villaRepository.Remove(existingVilla);
+            _villaRepository.Save();
 
             TempData["success"] = "The Villa has been deleted successfully.";
 
