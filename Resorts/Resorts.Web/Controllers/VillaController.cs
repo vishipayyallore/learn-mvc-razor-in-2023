@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Resorts.Application.Common.Interfaces;
 using Resorts.Domain.Entities;
-using Resorts.Infrastructure.Data;
 
 namespace Resorts.Web.Controllers;
 
 // Primary Constructor
-public class VillaController(ApplicationDbContext dbContext) : Controller
+public class VillaController(IVillaRepository villaRepository) : Controller
 {
-    private readonly ApplicationDbContext _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+    private readonly IVillaRepository _villaRepository = villaRepository ?? throw new ArgumentNullException(nameof(villaRepository));
 
     public IActionResult Index()
     {
-        var villas = _dbContext.Villas;
+        var villas = _villaRepository.GetAll();
 
         return View(villas);
     }
@@ -31,8 +31,8 @@ public class VillaController(ApplicationDbContext dbContext) : Controller
 
         if (ModelState.IsValid)
         {
-            _dbContext.Villas.Add(villa);
-            _dbContext.SaveChanges();
+            _villaRepository.Add(villa);
+            _villaRepository.Save();
 
             TempData["success"] = "The Villa has been created successfully.";
 
@@ -44,7 +44,7 @@ public class VillaController(ApplicationDbContext dbContext) : Controller
 
     public IActionResult Update(int villaId)
     {
-        Villa? villa = _dbContext.Villas.FirstOrDefault(x => x.Id == villaId);
+        Villa? villa = _villaRepository.Get(x => x.Id == villaId);
 
         if (villa is null)
         {
@@ -59,8 +59,8 @@ public class VillaController(ApplicationDbContext dbContext) : Controller
     {
         if (ModelState.IsValid && villa.Id > 0)
         {
-            _dbContext.Villas.Update(villa);
-            _dbContext.SaveChanges();
+            _villaRepository.Update(villa);
+            _villaRepository.Save();
 
             TempData["success"] = "The Villa has been updated successfully.";
 
@@ -72,7 +72,7 @@ public class VillaController(ApplicationDbContext dbContext) : Controller
 
     public IActionResult Delete(int villaId)
     {
-        Villa? villa = _dbContext.Villas.FirstOrDefault(x => x.Id == villaId);
+        Villa? villa = _villaRepository.Get(x => x.Id == villaId);
 
         if (villa is null)
         {
@@ -85,7 +85,7 @@ public class VillaController(ApplicationDbContext dbContext) : Controller
     [HttpPost]
     public IActionResult Delete(Villa villa)
     {
-        Villa? existingVilla = _dbContext.Villas.FirstOrDefault(x => x.Id == villa.Id);
+        Villa? existingVilla = _villaRepository.Get(x => x.Id == villa.Id);
 
         if (existingVilla is not null)
         {
