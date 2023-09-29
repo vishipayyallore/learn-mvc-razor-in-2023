@@ -42,12 +42,12 @@ public class VillaNumberController(IUnitOfWork unitOfWork) : Controller
         // Method 1
         // ModelState.Remove("Villa");
 
-        bool roomNumberExists = _dbContext.VillaNumbers.Any(r => r.Villa_Number == villaNumberVM.VillaNumber!.Villa_Number);
+        bool roomNumberExists = _unitOfWork.VillaNumber.Any(r => r.Villa_Number == villaNumberVM.VillaNumber!.Villa_Number);
 
         if (ModelState.IsValid && !roomNumberExists)
         {
-            _dbContext.VillaNumbers.Add(villaNumberVM.VillaNumber!);
-            _dbContext.SaveChanges();
+            _unitOfWork.VillaNumber.Add(villaNumberVM.VillaNumber!);
+            _unitOfWork.Save();
 
             TempData["success"] = "The Villa Number has been created successfully.";
 

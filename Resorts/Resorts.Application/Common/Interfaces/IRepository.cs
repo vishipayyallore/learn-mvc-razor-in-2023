@@ -10,5 +10,7 @@ public interface IRepository<T> where T : class
 
     void Add(T villa);
 
+    bool Any(Expression<Func<T, bool>> filter);
+
     void Remove(T villa);
 }
