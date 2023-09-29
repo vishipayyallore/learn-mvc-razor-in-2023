@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Resorts.Application.Common.Interfaces;
-using Resorts.Infrastructure.Data;
 using Resorts.Web.ViewModels;
 
 namespace Resorts.Web.Controllers;
@@ -69,7 +67,7 @@ public class VillaNumberController(IUnitOfWork unitOfWork) : Controller
         VillaNumberVM villaNumberVM = new()
         {
             VillaList = GetVillaList(),
-            VillaNumber = _dbContext.VillaNumbers.FirstOrDefault(r => r.Villa_Number == villaNumberId)
+            VillaNumber = _unitOfWork.VillaNumber.Get(r => r.Villa_Number == villaNumberId)
         };
 
         if (villaNumberVM.VillaNumber is null)
@@ -103,7 +101,7 @@ public class VillaNumberController(IUnitOfWork unitOfWork) : Controller
         VillaNumberVM villaNumberVM = new()
         {
             VillaList = GetVillaList(),
-            VillaNumber = _dbContext.VillaNumbers.FirstOrDefault(r => r.Villa_Number == villaNumberId)
+            VillaNumber = _unitOfWork.VillaNumber.Get(r => r.Villa_Number == villaNumberId)
         };
 
         if (villaNumberVM.VillaNumber is null)
@@ -117,12 +115,12 @@ public class VillaNumberController(IUnitOfWork unitOfWork) : Controller
     [HttpPost]
     public IActionResult Delete(VillaNumberVM villaNumberVM)
     {
-        var existingVillaNumber = _dbContext.VillaNumbers.FirstOrDefault(r => r.Villa_Number == villaNumberVM.VillaNumber!.Villa_Number);
+        var existingVillaNumber = _unitOfWork.VillaNumber.Get(r => r.Villa_Number == villaNumberVM.VillaNumber!.Villa_Number);
 
         if (existingVillaNumber is not null)
         {
-            _dbContext.VillaNumbers.Remove(existingVillaNumber);
-            _dbContext.SaveChanges();
+            _unitOfWork.VillaNumber.Remove(existingVillaNumber);
+            _unitOfWork.Save();
 
             TempData["success"] = "The Villa Number has been deleted successfully.";
 
