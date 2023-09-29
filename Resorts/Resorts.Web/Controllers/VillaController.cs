@@ -5,13 +5,13 @@ using Resorts.Domain.Entities;
 namespace Resorts.Web.Controllers;
 
 // Primary Constructor
-public class VillaController(IVillaRepository villaRepository) : Controller
+public class VillaController(IUnitOfWork unitOfWork) : Controller
 {
-    private readonly IVillaRepository _villaRepository = villaRepository ?? throw new ArgumentNullException(nameof(villaRepository));
+    private readonly IUnitOfWork _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
 
     public IActionResult Index()
     {
-        var villas = _villaRepository.GetAll();
+        var villas = _unitOfWork.Villa.GetAll();
 
         return View(villas);
     }
@@ -31,8 +31,8 @@ public class VillaController(IVillaRepository villaRepository) : Controller
 
         if (ModelState.IsValid)
         {
-            _villaRepository.Add(villa);
-            _villaRepository.Save();
+            _unitOfWork.Villa.Add(villa);
+            _unitOfWork.Villa.Save();
 
             TempData["success"] = "The Villa has been created successfully.";
 
@@ -44,7 +44,7 @@ public class VillaController(IVillaRepository villaRepository) : Controller
 
     public IActionResult Update(int villaId)
     {
-        Villa? villa = _villaRepository.Get(x => x.Id == villaId);
+        Villa? villa = _unitOfWork.Villa.Get(x => x.Id == villaId);
 
         if (villa is null)
         {
@@ -59,8 +59,8 @@ public class VillaController(IVillaRepository villaRepository) : Controller
     {
         if (ModelState.IsValid && villa.Id > 0)
         {
-            _villaRepository.Update(villa);
-            _villaRepository.Save();
+            _unitOfWork.Villa.Update(villa);
+            _unitOfWork.Villa.Save();
 
             TempData["success"] = "The Villa has been updated successfully.";
 
@@ -72,7 +72,7 @@ public class VillaController(IVillaRepository villaRepository) : Controller
 
     public IActionResult Delete(int villaId)
     {
-        Villa? villa = _villaRepository.Get(x => x.Id == villaId);
+        Villa? villa = _unitOfWork.Villa.Get(x => x.Id == villaId);
 
         if (villa is null)
         {
@@ -85,12 +85,12 @@ public class VillaController(IVillaRepository villaRepository) : Controller
     [HttpPost]
     public IActionResult Delete(Villa villa)
     {
-        Villa? existingVilla = _villaRepository.Get(x => x.Id == villa.Id);
+        Villa? existingVilla = _unitOfWork.Villa.Get(x => x.Id == villa.Id);
 
         if (existingVilla is not null)
         {
-            _villaRepository.Remove(existingVilla);
-            _villaRepository.Save();
+            _unitOfWork.Villa.Remove(existingVilla);
+            _unitOfWork.Villa.Save();
 
             TempData["success"] = "The Villa has been deleted successfully.";
 
