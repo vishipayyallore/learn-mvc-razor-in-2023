@@ -1,18 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Resorts.Application.Common.Interfaces;
 using Resorts.Infrastructure.Data;
 using Resorts.Web.ViewModels;
 
 namespace Resorts.Web.Controllers;
 
-public class VillaNumberController(ApplicationDbContext dbContext) : Controller
+public class VillaNumberController(IUnitOfWork unitOfWork) : Controller
 {
-    private readonly ApplicationDbContext _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+    private readonly IUnitOfWork _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
 
     public IActionResult Index()
     {
-        var villaNumbers = _dbContext.VillaNumbers.Include(r => r.Villa).ToList();
+        var villaNumbers = _unitOfWork.VillaNumber.GetAll(includeProperties: "Villa");
 
         return View(villaNumbers);
     }
@@ -135,7 +136,7 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
 
     private IEnumerable<SelectListItem> GetVillaList()
     {
-        return _dbContext.Villas.Select(r => new SelectListItem
+        return _unitOfWork.Villa.GetAll().Select(r => new SelectListItem
         {
             Text = r.Name,
             Value = $"{r.Id}",
