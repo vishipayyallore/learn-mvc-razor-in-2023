@@ -9,6 +9,8 @@ public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork
 
     public IVillaRepository Villa { get; private set; } = new VillaRepository(context);
 
+    public IVillaNumberRepository VillaNumber { get; private set; } = new VillaNumberRepository(context);
+
     public void Save()
     {
         _ = _context.SaveChanges();
