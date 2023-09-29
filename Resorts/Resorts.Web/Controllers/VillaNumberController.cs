@@ -85,8 +85,8 @@ public class VillaNumberController(IUnitOfWork unitOfWork) : Controller
     {
         if (ModelState.IsValid)
         {
-            _dbContext.VillaNumbers.Update(villaNumberVM.VillaNumber!);
-            _dbContext.SaveChanges();
+            _unitOfWork.VillaNumber.Update(villaNumberVM.VillaNumber!);
+            _unitOfWork.Save();
 
             TempData["success"] = "The Villa Number has been updated successfully.";
 
