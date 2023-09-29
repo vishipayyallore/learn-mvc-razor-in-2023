@@ -14,8 +14,8 @@ public class VillaRepository(ApplicationDbContext dbContext) : Repository<Villa>
         _ = _dbContext.SaveChanges();
     }
 
-    public void Update(Villa villa)
+    public void Update(Villa entity)
     {
-        _ = _dbContext.Villas.Update(villa);
+        _ = _dbContext.Villas.Update(entity);
     }
 }
