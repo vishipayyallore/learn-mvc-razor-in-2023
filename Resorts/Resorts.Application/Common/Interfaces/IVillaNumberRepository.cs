@@ -2,7 +2,7 @@
 
 namespace Resorts.Application.Common.Interfaces;
 
-public interface IVillaRepoNumbRepository : IRepository<VillaNumber>
+public interface IVillaNumberRepository : IRepository<VillaNumber>
 {
     void Update(VillaNumber entity);
 
