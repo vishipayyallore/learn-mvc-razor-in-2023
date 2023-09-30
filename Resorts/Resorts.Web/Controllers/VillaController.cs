@@ -5,9 +5,10 @@ using Resorts.Domain.Entities;
 namespace Resorts.Web.Controllers;
 
 // Primary Constructor
-public class VillaController(IUnitOfWork unitOfWork) : Controller
+public class VillaController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment) : Controller
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+    private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment ?? throw new ArgumentNullException(nameof(webHostEnvironment));
 
     public IActionResult Index()
     {
@@ -31,6 +32,16 @@ public class VillaController(IUnitOfWork unitOfWork) : Controller
 
         if (ModelState.IsValid)
         {
+
+            if(villa.Image is not null)
+            {
+
+            }
+            else
+            {
+                villa.ImageUrl = "https://placehold.co/600x400";
+            }
+
             _unitOfWork.Villa.Add(villa);
             _unitOfWork.Villa.Save();
 
