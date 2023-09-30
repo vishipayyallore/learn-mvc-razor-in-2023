@@ -130,6 +130,16 @@ public class VillaController(IUnitOfWork unitOfWork, IWebHostEnvironment webHost
 
         if (existingVilla is not null)
         {
+            if (!string.IsNullOrEmpty(existingVilla.ImageUrl))
+            {
+                string oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, existingVilla.ImageUrl.TrimStart('\\'));
+
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
+            }
+
             _unitOfWork.Villa.Remove(existingVilla);
             _unitOfWork.Villa.Save();
 
