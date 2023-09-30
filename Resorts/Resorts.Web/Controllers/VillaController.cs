@@ -32,7 +32,6 @@ public class VillaController(IUnitOfWork unitOfWork, IWebHostEnvironment webHost
 
         if (ModelState.IsValid)
         {
-
             if (villa.Image is not null)
             {
                 const string imageFolderName = @"images\VillaImage";
@@ -78,6 +77,29 @@ public class VillaController(IUnitOfWork unitOfWork, IWebHostEnvironment webHost
     {
         if (ModelState.IsValid && villa.Id > 0)
         {
+            if (villa.Image is not null)
+            {
+                const string imageFolderName = @"images\VillaImage";
+
+                string fileName = $"{Guid.NewGuid()}{Path.GetExtension(villa.Image.FileName)}";
+                string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, imageFolderName);
+
+                if (!string.IsNullOrEmpty(villa.ImageUrl))
+                {
+                    string oldImagePath = Path.Combine(_webHostEnvironment.ContentRootPath, villa.ImageUrl.TrimStart('\\'));
+
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath)
+                    }
+                }
+
+                using FileStream fileStream = new(Path.Combine(imagePath, fileName), FileMode.Create);
+                villa.Image.CopyTo(fileStream);
+
+                villa.ImageUrl = $"\\{imageFolderName}\\{fileName}";
+            }
+
             _unitOfWork.Villa.Update(villa);
             _unitOfWork.Villa.Save();
 
