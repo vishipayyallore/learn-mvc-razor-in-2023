@@ -90,7 +90,7 @@ public class VillaController(IUnitOfWork unitOfWork, IWebHostEnvironment webHost
 
                     if (System.IO.File.Exists(oldImagePath))
                     {
-                        System.IO.File.Delete(oldImagePath)
+                        System.IO.File.Delete(oldImagePath);
                     }
                 }
 
