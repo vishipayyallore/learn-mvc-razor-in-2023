@@ -33,9 +33,17 @@ public class VillaController(IUnitOfWork unitOfWork, IWebHostEnvironment webHost
         if (ModelState.IsValid)
         {
 
-            if(villa.Image is not null)
+            if (villa.Image is not null)
             {
+                const string imageFolderName = @"images\VillaImage";
 
+                string fileName = $"{Guid.NewGuid()}{Path.GetExtension(villa.Image.FileName)}";
+                string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, imageFolderName);
+
+                using FileStream fileStream = new(Path.Combine(imagePath, fileName), FileMode.Create);
+                villa.Image.CopyTo(fileStream);
+
+                villa.ImageUrl = $"{imageFolderName}\\{fileName}";
             }
             else
             {
