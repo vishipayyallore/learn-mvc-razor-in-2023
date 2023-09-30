@@ -86,7 +86,7 @@ public class VillaController(IUnitOfWork unitOfWork, IWebHostEnvironment webHost
 
                 if (!string.IsNullOrEmpty(villa.ImageUrl))
                 {
-                    string oldImagePath = Path.Combine(_webHostEnvironment.ContentRootPath, villa.ImageUrl.TrimStart('\\'));
+                    string oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, villa.ImageUrl.TrimStart('\\'));
 
                     if (System.IO.File.Exists(oldImagePath))
                     {
