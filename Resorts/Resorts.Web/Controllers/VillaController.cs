@@ -43,7 +43,7 @@ public class VillaController(IUnitOfWork unitOfWork, IWebHostEnvironment webHost
                 using FileStream fileStream = new(Path.Combine(imagePath, fileName), FileMode.Create);
                 villa.Image.CopyTo(fileStream);
 
-                villa.ImageUrl = $"{imageFolderName}\\{fileName}";
+                villa.ImageUrl = $"\\{imageFolderName}\\{fileName}";
             }
             else
             {
