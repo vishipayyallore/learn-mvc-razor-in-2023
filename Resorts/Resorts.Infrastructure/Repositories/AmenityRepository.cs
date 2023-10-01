@@ -9,11 +9,6 @@ public class AmenityRepository(ApplicationDbContext dbContext) : Repository<Amen
     private static readonly char[] separator = [','];
     private readonly ApplicationDbContext _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
 
-    public void Save()
-    {
-        _ = _dbContext.SaveChanges();
-    }
-
     public void Update(Amenity entity)
     {
         _ = _dbContext.Amenities.Update(entity);

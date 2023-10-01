@@ -9,11 +9,6 @@ public class VillaNumberRepository(ApplicationDbContext dbContext) : Repository<
     private static readonly char[] separator = [','];
     private readonly ApplicationDbContext _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
 
-    public void Save()
-    {
-        _ = _dbContext.SaveChanges();
-    }
-
     public void Update(VillaNumber entity)
     {
         _ = _dbContext.VillaNumbers.Update(entity);
