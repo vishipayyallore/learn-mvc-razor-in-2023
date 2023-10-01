@@ -14,7 +14,7 @@
     </div>
 
     <div class="card-body border p-4">
-        <form method="post" class="row" enctype="multipart/form-data">
+        <form method="post" class="row">
             <input asp-for="Amenity!.Id" hidden />
             <div class="p-3">
                 <div asp-validation-summary="ModelOnly"></div>
@@ -26,7 +26,7 @@
                     <span asp-validation-for="Amenity!.VillaId" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="Amenity!.Name" disabled class="form-control border shadow" />
+                    <input asp-for="Amenity!.Name" class="form-control border shadow" />
                     <label asp-for="Amenity!.Name" class="ms-2"></label>
                     <span asp-validation-for="Amenity!.Name" class="text-danger"></span>
                 </div>
