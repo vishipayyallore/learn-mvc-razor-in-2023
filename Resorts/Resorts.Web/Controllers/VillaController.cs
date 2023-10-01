@@ -5,13 +5,14 @@ using Resorts.Domain.Entities;
 namespace Resorts.Web.Controllers;
 
 // Primary Constructor
-public class VillaController(IVillaRepository villaRepository) : Controller
+public class VillaController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment) : Controller
 {
-    private readonly IVillaRepository _villaRepository = villaRepository ?? throw new ArgumentNullException(nameof(villaRepository));
+    private readonly IUnitOfWork _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+    private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment ?? throw new ArgumentNullException(nameof(webHostEnvironment));
 
     public IActionResult Index()
     {
-        var villas = _villaRepository.GetAll();
+        var villas = _unitOfWork.Villa.GetAll();
 
         return View(villas);
     }
@@ -31,8 +32,25 @@ public class VillaController(IVillaRepository villaRepository) : Controller
 
         if (ModelState.IsValid)
         {
-            _villaRepository.Add(villa);
-            _villaRepository.Save();
+            if (villa.Image is not null)
+            {
+                const string imageFolderName = @"images\VillaImage";
+
+                string fileName = $"{Guid.NewGuid()}{Path.GetExtension(villa.Image.FileName)}";
+                string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, imageFolderName);
+
+                using FileStream fileStream = new(Path.Combine(imagePath, fileName), FileMode.Create);
+                villa.Image.CopyTo(fileStream);
+
+                villa.ImageUrl = $"\\{imageFolderName}\\{fileName}";
+            }
+            else
+            {
+                villa.ImageUrl = "https://placehold.co/600x400";
+            }
+
+            _unitOfWork.Villa.Add(villa);
+            _unitOfWork.Villa.Save();
 
             TempData["success"] = "The Villa has been created successfully.";
 
@@ -44,7 +62,7 @@ public class VillaController(IVillaRepository villaRepository) : Controller
 
     public IActionResult Update(int villaId)
     {
-        Villa? villa = _villaRepository.Get(x => x.Id == villaId);
+        Villa? villa = _unitOfWork.Villa.Get(x => x.Id == villaId);
 
         if (villa is null)
         {
@@ -59,8 +77,31 @@ public class VillaController(IVillaRepository villaRepository) : Controller
     {
         if (ModelState.IsValid && villa.Id > 0)
         {
-            _villaRepository.Update(villa);
-            _villaRepository.Save();
+            if (villa.Image is not null)
+            {
+                const string imageFolderName = @"images\VillaImage";
+
+                string fileName = $"{Guid.NewGuid()}{Path.GetExtension(villa.Image.FileName)}";
+                string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, imageFolderName);
+
+                if (!string.IsNullOrEmpty(villa.ImageUrl))
+                {
+                    string oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, villa.ImageUrl.TrimStart('\\'));
+
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+
+                using FileStream fileStream = new(Path.Combine(imagePath, fileName), FileMode.Create);
+                villa.Image.CopyTo(fileStream);
+
+                villa.ImageUrl = $"\\{imageFolderName}\\{fileName}";
+            }
+
+            _unitOfWork.Villa.Update(villa);
+            _unitOfWork.Villa.Save();
 
             TempData["success"] = "The Villa has been updated successfully.";
 
@@ -72,7 +113,7 @@ public class VillaController(IVillaRepository villaRepository) : Controller
 
     public IActionResult Delete(int villaId)
     {
-        Villa? villa = _villaRepository.Get(x => x.Id == villaId);
+        Villa? villa = _unitOfWork.Villa.Get(x => x.Id == villaId);
 
         if (villa is null)
         {
@@ -85,12 +126,22 @@ public class VillaController(IVillaRepository villaRepository) : Controller
     [HttpPost]
     public IActionResult Delete(Villa villa)
     {
-        Villa? existingVilla = _villaRepository.Get(x => x.Id == villa.Id);
+        Villa? existingVilla = _unitOfWork.Villa.Get(x => x.Id == villa.Id);
 
         if (existingVilla is not null)
         {
-            _villaRepository.Remove(existingVilla);
-            _villaRepository.Save();
+            if (!string.IsNullOrEmpty(existingVilla.ImageUrl))
+            {
+                string oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, existingVilla.ImageUrl.TrimStart('\\'));
+
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
+            }
+
+            _unitOfWork.Villa.Remove(existingVilla);
+            _unitOfWork.Villa.Save();
 
             TempData["success"] = "The Villa has been deleted successfully.";
 

@@ -1,18 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Resorts.Infrastructure.Data;
+using Resorts.Application.Common.Interfaces;
 using Resorts.Web.ViewModels;
 
 namespace Resorts.Web.Controllers;
 
-public class VillaNumberController(ApplicationDbContext dbContext) : Controller
+public class VillaNumberController(IUnitOfWork unitOfWork) : Controller
 {
-    private readonly ApplicationDbContext _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+    private readonly IUnitOfWork _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
 
     public IActionResult Index()
     {
-        var villaNumbers = _dbContext.VillaNumbers.Include(r => r.Villa).ToList();
+        var villaNumbers = _unitOfWork.VillaNumber.GetAll(includeProperties: "Villa");
 
         return View(villaNumbers);
     }
@@ -41,12 +40,12 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
         // Method 1
         // ModelState.Remove("Villa");
 
-        bool roomNumberExists = _dbContext.VillaNumbers.Any(r => r.Villa_Number == villaNumberVM.VillaNumber!.Villa_Number);
+        bool roomNumberExists = _unitOfWork.VillaNumber.Any(r => r.Villa_Number == villaNumberVM.VillaNumber!.Villa_Number);
 
         if (ModelState.IsValid && !roomNumberExists)
         {
-            _dbContext.VillaNumbers.Add(villaNumberVM.VillaNumber!);
-            _dbContext.SaveChanges();
+            _unitOfWork.VillaNumber.Add(villaNumberVM.VillaNumber!);
+            _unitOfWork.Save();
 
             TempData["success"] = "The Villa Number has been created successfully.";
 
@@ -68,7 +67,7 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
         VillaNumberVM villaNumberVM = new()
         {
             VillaList = GetVillaList(),
-            VillaNumber = _dbContext.VillaNumbers.FirstOrDefault(r => r.Villa_Number == villaNumberId)
+            VillaNumber = _unitOfWork.VillaNumber.Get(r => r.Villa_Number == villaNumberId)
         };
 
         if (villaNumberVM.VillaNumber is null)
@@ -84,8 +83,8 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
     {
         if (ModelState.IsValid)
         {
-            _dbContext.VillaNumbers.Update(villaNumberVM.VillaNumber!);
-            _dbContext.SaveChanges();
+            _unitOfWork.VillaNumber.Update(villaNumberVM.VillaNumber!);
+            _unitOfWork.Save();
 
             TempData["success"] = "The Villa Number has been updated successfully.";
 
@@ -102,7 +101,7 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
         VillaNumberVM villaNumberVM = new()
         {
             VillaList = GetVillaList(),
-            VillaNumber = _dbContext.VillaNumbers.FirstOrDefault(r => r.Villa_Number == villaNumberId)
+            VillaNumber = _unitOfWork.VillaNumber.Get(r => r.Villa_Number == villaNumberId)
         };
 
         if (villaNumberVM.VillaNumber is null)
@@ -116,12 +115,12 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
     [HttpPost]
     public IActionResult Delete(VillaNumberVM villaNumberVM)
     {
-        var existingVillaNumber = _dbContext.VillaNumbers.FirstOrDefault(r => r.Villa_Number == villaNumberVM.VillaNumber!.Villa_Number);
+        var existingVillaNumber = _unitOfWork.VillaNumber.Get(r => r.Villa_Number == villaNumberVM.VillaNumber!.Villa_Number);
 
         if (existingVillaNumber is not null)
         {
-            _dbContext.VillaNumbers.Remove(existingVillaNumber);
-            _dbContext.SaveChanges();
+            _unitOfWork.VillaNumber.Remove(existingVillaNumber);
+            _unitOfWork.Save();
 
             TempData["success"] = "The Villa Number has been deleted successfully.";
 
@@ -135,7 +134,7 @@ public class VillaNumberController(ApplicationDbContext dbContext) : Controller
 
     private IEnumerable<SelectListItem> GetVillaList()
     {
-        return _dbContext.Villas.Select(r => new SelectListItem
+        return _unitOfWork.Villa.GetAll().Select(r => new SelectListItem
         {
             Text = r.Name,
             Value = $"{r.Id}",
