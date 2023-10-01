@@ -15,7 +15,7 @@
 
     <div class="card-body border p-4">
         <form method="post" class="row" enctype="multipart/form-data">
-            <input asp-for="Amenity!.Villa_Number" hidden />
+            <input asp-for="Amenity!.Id" hidden />
             <div class="p-3">
                 <div asp-validation-summary="ModelOnly"></div>
                 <div class="form-floating py-1 col-12">
@@ -26,14 +26,14 @@
                     <span asp-validation-for="Amenity!.VillaId" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-1 col-12">
-                    <input disabled asp-for="Amenity!.Villa_Number" class="form-control border shadow" />
-                    <label asp-for="Amenity!.Villa_Number" class="ms-2"></label>
-                    <span asp-validation-for="Amenity!.Villa_Number" class="text-danger"></span>
+                    <input disabled asp-for="Amenity!.Name" class="form-control border shadow" />
+                    <label asp-for="Amenity!.Name" class="ms-2"></label>
+                    <span asp-validation-for="Amenity!.Name" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-1 col-12">
-                    <input disabled asp-for="Amenity!.SpecialDetails" class="form-control border shadow" />
-                    <label asp-for="Amenity!.SpecialDetails" class="ms-2"></label>
-                    <span asp-validation-for="Amenity!.SpecialDetails" class="text-danger"></span>
+                    <input disabled asp-for="Amenity!.Description" class="form-control border shadow" />
+                    <label asp-for="Amenity!.Description" class="ms-2"></label>
+                    <span asp-validation-for="Amenity!.Description" class="text-danger"></span>
                 </div>
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
