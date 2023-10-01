@@ -18,12 +18,12 @@ public class AmenityController(IUnitOfWork unitOfWork) : Controller
 
     public IActionResult Create()
     {
-        AmenityVM AmenityVM = new()
+        AmenityVM amenityVM = new()
         {
             VillaList = GetVillaList()
         };
 
-        return View(AmenityVM);
+        return View(amenityVM);
     }
 
     [HttpPost]
@@ -44,72 +44,62 @@ public class AmenityController(IUnitOfWork unitOfWork) : Controller
         return View(amenityVM);
     }
 
-    public IActionResult Update(int AmenityId)
+    public IActionResult Update(int amenityId)
     {
-        AmenityVM AmenityVM = new()
+        AmenityVM amenityVM = new()
         {
             VillaList = GetVillaList(),
-            Amenity = _unitOfWork.Amenity.Get(r => r.Villa_Number == AmenityId)
+            Amenity = _unitOfWork.Amenity.Get(r => r.Id == amenityId)
         };
 
-        if (AmenityVM.Amenity is null)
-        {
-            return RedirectToAction("Error", "Home");
-        }
-
-        return View(AmenityVM);
+        return amenityVM.Amenity is null ? RedirectToAction("Error", "Home") : View(amenityVM);
     }
 
     [HttpPost]
-    public IActionResult Update(AmenityVM AmenityVM)
+    public IActionResult Update(AmenityVM amenityVM)
     {
         if (ModelState.IsValid)
         {
-            _unitOfWork.Amenity.Update(AmenityVM.Amenity!);
+            _unitOfWork.Amenity.Update(amenityVM.Amenity!);
             _unitOfWork.Save();
 
-            TempData["success"] = "The Villa Number has been updated successfully.";
+            TempData["success"] = "The Amenity has been updated successfully.";
 
             return RedirectToAction(nameof(Index));
         }
 
-        AmenityVM.VillaList = GetVillaList();
+        amenityVM.VillaList = GetVillaList();
 
-        return View(AmenityVM);
+        return View(amenityVM);
     }
 
-    public IActionResult Delete(int AmenityId)
+    public IActionResult Delete(int amenityId)
     {
-        AmenityVM AmenityVM = new()
+        AmenityVM amenityVM = new()
         {
             VillaList = GetVillaList(),
-            Amenity = _unitOfWork.Amenity.Get(r => r.Villa_Number == AmenityId)
+            Amenity = _unitOfWork.Amenity.Get(r => r.Id == amenityId)
         };
 
-        if (AmenityVM.Amenity is null)
-        {
-            return RedirectToAction("Error", "Home");
-        }
-
-        return View(AmenityVM);
+        return amenityVM.Amenity is null ? RedirectToAction("Error", "Home") : View(amenityVM);
     }
 
     [HttpPost]
     public IActionResult Delete(AmenityVM AmenityVM)
     {
-        var existingAmenity = _unitOfWork.Amenity.Get(r => r.Villa_Number == AmenityVM.Amenity!.Villa_Number);
+        var existingAmenity = _unitOfWork.Amenity.Get(r => r.Id == AmenityVM.Amenity!.Id);
 
         if (existingAmenity is not null)
         {
             _unitOfWork.Amenity.Remove(existingAmenity);
             _unitOfWork.Save();
 
-            TempData["success"] = "The Villa Number has been deleted successfully.";
+            TempData["success"] = "The Amenity has been deleted successfully.";
 
             return RedirectToAction(nameof(Index));
         }
 
-        TempData["error"] = "The Villa Number could not be deleted.";
+        TempData["error"] = "The Amenity could not be deleted.";
 
         return View(AmenityVM);
     }
