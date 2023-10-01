@@ -1,22 +1,22 @@
 ﻿@{
-    ViewData["Title"] = "Villa Numbers List";
+    ViewData["Title"] = "Amenity List";
 }
 
-@model IEnumerable<VillaNumber>
+@model IEnumerable<Amenity>
 
 <div class="w-100 card border-0 p-4">
     <div class="card-header bg-primary bg-gradient ml-0 py-0">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-0">Villa Numbers List</h2>
+                <h2 class="text-white py-0">Amenity List</h2>
             </div>
         </div>
     </div>
     <div class="card-body border p-4">
         <div class="row pb-3">
             <div class="col-6 offset-6 text-end">
-                <a asp-controller="VillaNumber" asp-action="Create" class="btn btn-success">
-                    <i class="bi bi-plus-circle"></i> Create New Villa Number
+                <a asp-controller="Amenity" asp-action="Create" class="btn btn-success">
+                    <i class="bi bi-plus-circle"></i> Create New Amenity
                 </a>
             </div>
         </div>
@@ -25,27 +25,27 @@
             <thead>
                 <tr>
                     <th>
-                        Villa Name
+                        Id
                     </th>
-                    <th>Villa Number</th>
-                    <th>Special Details</th>
+                    <th>Name</th>
+                    <th>Villa Name</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var villaNumber in Model)
+                @foreach (var amenity in Model)
                 {
                     <tr>
-                        <td>@villaNumber.Villa!.Name</td>
-                        <td>@villaNumber.Villa_Number</td>
-                        <td>@villaNumber.SpecialDetails</td>
+                        <td>@amenity.Id</td>
+                        <td>@amenity.Name</td>
+                        <td>@amenity.Villa!.Name</td>
                         <td class="text-center">
                             <div class="w-75 btn-group" role="group">
-                                <a asp-controller="VillaNumber" asp-action="Update" asp-route-villaNumberId="@villaNumber.Villa_Number"
+                                <a asp-controller="Amenity" asp-action="Update" asp-route-amenityId="@amenity.Id"
                                    class="btn btn-warning mx-2">
                                     <i class="bi bi-pencil-square"></i> Edit
                                 </a>
-                                <a asp-controller="VillaNumber" asp-action="Delete" asp-route-villaNumberId="@villaNumber.Villa_Number"
+                                <a asp-controller="Amenity" asp-action="Delete" asp-route-amenityId="@amenity.Id"
                                    class="btn btn-danger mx-2">
                                     <i class="bi bi-trash-fill"></i> Delete
                                 </a>

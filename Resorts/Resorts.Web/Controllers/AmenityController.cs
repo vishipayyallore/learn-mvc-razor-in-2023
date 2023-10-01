@@ -85,9 +85,9 @@ public class AmenityController(IUnitOfWork unitOfWork) : Controller
     }
 
     [HttpPost]
-    public IActionResult Delete(AmenityVM AmenityVM)
+    public IActionResult Delete(AmenityVM amenityVM)
     {
-        var existingAmenity = _unitOfWork.Amenity.Get(r => r.Id == AmenityVM.Amenity!.Id);
+        var existingAmenity = _unitOfWork.Amenity.Get(r => r.Id == amenityVM.Amenity!.Id);
 
         if (existingAmenity is not null)
         {
@@ -101,7 +101,7 @@ public class AmenityController(IUnitOfWork unitOfWork) : Controller
 
         TempData["error"] = "The Amenity could not be deleted.";
 
-        return View(AmenityVM);
+        return View(amenityVM);
     }
 
     private IEnumerable<SelectListItem> GetVillaList()
