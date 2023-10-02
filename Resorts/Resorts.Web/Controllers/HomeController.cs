@@ -11,6 +11,8 @@ public class HomeController(IUnitOfWork unitOfWork, ILogger<HomeController> logg
 
     public IActionResult Index()
     {
+        _logger.LogInformation("Starting HomeController::Index().");
+
         HomeVM homeVM = new()
         {
             VillaList = _unitOfWork.Villa.GetAll(),
