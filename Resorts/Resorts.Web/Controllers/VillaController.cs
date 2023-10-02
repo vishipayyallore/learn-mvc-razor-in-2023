@@ -50,7 +50,7 @@ public class VillaController(IUnitOfWork unitOfWork, IWebHostEnvironment webHost
             }
 
             _unitOfWork.Villa.Add(villa);
-            _unitOfWork.Villa.Save();
+            _unitOfWork.Save();
 
             TempData["success"] = "The Villa has been created successfully.";
 
@@ -101,7 +101,7 @@ public class VillaController(IUnitOfWork unitOfWork, IWebHostEnvironment webHost
             }
 
             _unitOfWork.Villa.Update(villa);
-            _unitOfWork.Villa.Save();
+            _unitOfWork.Save();
 
             TempData["success"] = "The Villa has been updated successfully.";
 
@@ -141,7 +141,7 @@ public class VillaController(IUnitOfWork unitOfWork, IWebHostEnvironment webHost
             }
 
             _unitOfWork.Villa.Remove(existingVilla);
-            _unitOfWork.Villa.Save();
+            _unitOfWork.Save();
 
             TempData["success"] = "The Villa has been deleted successfully.";
 

@@ -4,13 +4,13 @@ using Resorts.Infrastructure.Data;
 
 namespace Resorts.Infrastructure.Repositories;
 
-public class VillaNumberRepository(ApplicationDbContext dbContext) : Repository<VillaNumber>(dbContext), IVillaNumberRepository
+public class AmenityRepository(ApplicationDbContext dbContext) : Repository<Amenity>(dbContext), IAmenityRepository
 {
     private static readonly char[] separator = [','];
     private readonly ApplicationDbContext _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
 
-    public void Update(VillaNumber entity)
+    public void Update(Amenity entity)
     {
-        _ = _dbContext.VillaNumbers.Update(entity);
+        _ = _dbContext.Amenities.Update(entity);
     }
 }

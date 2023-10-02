@@ -11,6 +11,8 @@ public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork
 
     public IVillaNumberRepository VillaNumber { get; private set; } = new VillaNumberRepository(context);
 
+    public IAmenityRepository Amenity { get; private set; } = new AmenityRepository(context);
+
     public void Save()
     {
         _ = _context.SaveChanges();
