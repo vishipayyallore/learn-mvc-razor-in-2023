@@ -1,14 +1,26 @@
 using Microsoft.AspNetCore.Mvc;
+using Resorts.Application.Common.Interfaces;
+using Resorts.Web.ViewModels;
 
 namespace Resorts.Web.Controllers;
 
-public class HomeController(ILogger<HomeController> logger) : Controller
+public class HomeController(IUnitOfWork unitOfWork, ILogger<HomeController> logger) : Controller
 {
     private readonly ILogger<HomeController> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    private readonly IUnitOfWork _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
 
     public IActionResult Index()
     {
-        return View();
+        _logger.LogInformation("Starting HomeController::Index().");
+
+        HomeVM homeVM = new()
+        {
+            VillaList = _unitOfWork.Villa.GetAll(includeProperties: "VillaAmenity"),
+            Nights = 1,
+            CheckInDate = DateOnly.FromDateTime(DateTime.Now),
+        };
+
+        return View(homeVM);
     }
 
     public IActionResult Privacy()
@@ -21,9 +33,11 @@ public class HomeController(ILogger<HomeController> logger) : Controller
         return View();
     }
 
-    //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    //public IActionResult Error()
-    //{
-    //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    //}
 }
+
+
+//[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+//public IActionResult Error()
+//{
+//    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+//}
