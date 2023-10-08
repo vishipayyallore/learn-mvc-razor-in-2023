@@ -4,13 +4,15 @@ using Resorts.Domain.Entities;
 
 namespace Resorts.Infrastructure.Data;
 
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext(options)
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options)
 {
     public DbSet<Villa> Villas => Set<Villa>();
 
     public DbSet<VillaNumber> VillaNumbers => Set<VillaNumber>();
 
     public DbSet<Amenity> Amenities => Set<Amenity>();
+
+    public DbSet<ApplicationUser> ApplicationUsers => Set<ApplicationUser>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
