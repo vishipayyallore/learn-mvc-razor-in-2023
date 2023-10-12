@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Resorts.Application.Common.Interfaces;
 using Resorts.Domain.Entities;
+using Resorts.Web.ViewModels;
 
 namespace Resorts.Web.Controllers;
 
@@ -12,9 +13,18 @@ public class AccountController(IUnitOfWork unitOfWork, UserManager<ApplicationUs
     private readonly SignInManager<ApplicationUser> _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
     private readonly RoleManager<IdentityRole> _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
 
-    public IActionResult Login()
+    public IActionResult Login(string? returnUrl)
     {
-        return View();
+        returnUrl ??= Url.Content("~/");
+
+        LoginVM loginVM = new()
+        {
+            Email = string.Empty,
+            Password = string.Empty,
+            RedirectUrl = returnUrl,
+        };
+
+        return View(loginVM);
     }
 
     public IActionResult Register()
