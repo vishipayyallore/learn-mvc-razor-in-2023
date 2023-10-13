@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Resorts.Application.Common.Interfaces;
 using Resorts.Domain.Entities;
 using Resorts.Web.ViewModels;
@@ -36,6 +37,19 @@ public class AccountController(IUnitOfWork unitOfWork, UserManager<ApplicationUs
             _roleManager.CreateAsync(new IdentityRole("Customer")).Wait();
         }
 
-        return View();
+        RegisterVM registerVM = new()
+        {
+            Name = string.Empty,
+            Email = string.Empty,
+            Password = string.Empty,
+            ConfirmPassword = string.Empty,
+            RoleList = _roleManager.Roles.Select(x => new SelectListItem
+            {
+                Text = x.Name,
+                Value = x.Name
+            })
+        };
+
+        return View(registerVM);
     }
 }
