@@ -53,4 +53,22 @@ public class AccountController(IUnitOfWork unitOfWork, UserManager<ApplicationUs
 
         return View(registerVM);
     }
+
+    [HttpPost]
+    public IActionResult Register(RegisterVM registerVM)
+    {
+        ApplicationUser user = new()
+        {
+            Name = registerVM.Name,
+            Email = registerVM.Email,
+            PhoneNumber = registerVM.PhoneNumber,
+            NormalizedEmail = registerVM.Email.ToUpper(),
+            EmailConfirmed = true,
+            UserName = registerVM.Email,
+            CreatedAt = DateTime.Now,
+        };
+
+        return View(registerVM);
+    }
+
 }
