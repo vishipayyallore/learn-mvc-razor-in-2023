@@ -55,7 +55,7 @@ public class AccountController(IUnitOfWork unitOfWork, UserManager<ApplicationUs
     }
 
     [HttpPost]
-    public IActionResult Register(RegisterVM registerVM)
+    public async Task<IActionResult> Register(RegisterVM registerVM)
     {
         ApplicationUser user = new()
         {
@@ -67,6 +67,31 @@ public class AccountController(IUnitOfWork unitOfWork, UserManager<ApplicationUs
             UserName = registerVM.Email,
             CreatedAt = DateTime.Now,
         };
+
+        IdentityResult results = await _userManager.CreateAsync(user, registerVM.Password);
+
+        if (results.Succeeded)
+        {
+            if (!string.IsNullOrEmpty(registerVM.Role))
+            {
+                _ = await _userManager.AddToRoleAsync(user, registerVM.Role);
+            }
+            else
+            {
+                _ = await _userManager.AddToRoleAsync(user, SD.Role_Customer);
+            }
+
+            await _signInManager.SignInAsync(user, isPersistent: false);
+
+            if (string.IsNullOrEmpty(registerVM.RedirectUrl))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return RedirectToAction(registerVM.RedirectUrl);
+            }
+        }
 
         return View(registerVM);
     }
