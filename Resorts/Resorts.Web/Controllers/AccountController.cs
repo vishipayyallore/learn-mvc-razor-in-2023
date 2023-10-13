@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Resorts.Application.Common.Interfaces;
 using Resorts.Domain.Entities;
 using Resorts.Web.ViewModels;
+using WhiteLagoon.Application.Common.Utility;
 
 namespace Resorts.Web.Controllers;
 
@@ -31,10 +32,10 @@ public class AccountController(IUnitOfWork unitOfWork, UserManager<ApplicationUs
     public IActionResult Register()
     {
 
-        if (!_roleManager.RoleExistsAsync("Admin").GetAwaiter().GetResult())
+        if (!_roleManager.RoleExistsAsync(SD.Role_Admin).GetAwaiter().GetResult())
         {
-            _roleManager.CreateAsync(new IdentityRole("Admin")).Wait();
-            _roleManager.CreateAsync(new IdentityRole("Customer")).Wait();
+            _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).Wait();
+            _roleManager.CreateAsync(new IdentityRole(SD.Role_Customer)).Wait();
         }
 
         RegisterVM registerVM = new()
