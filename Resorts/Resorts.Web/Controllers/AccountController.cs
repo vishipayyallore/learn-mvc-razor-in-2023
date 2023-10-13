@@ -89,9 +89,20 @@ public class AccountController(IUnitOfWork unitOfWork, UserManager<ApplicationUs
             }
             else
             {
-                return RedirectToAction(registerVM.RedirectUrl);
+                return LocalRedirect(registerVM.RedirectUrl);
             }
         }
+
+        foreach (var error in results.Errors)
+        {
+            ModelState.AddModelError("", error.Description);
+        }
+
+        registerVM.RoleList = _roleManager.Roles.Select(x => new SelectListItem
+        {
+            Text = x.Name,
+            Value = x.Name
+        });
 
         return View(registerVM);
     }
