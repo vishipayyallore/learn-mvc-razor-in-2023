@@ -29,6 +29,33 @@ public class AccountController(IUnitOfWork unitOfWork, UserManager<ApplicationUs
         return View(loginVM);
     }
 
+    [HttpPost]
+    public async Task<IActionResult> Login(LoginVM loginVM)
+    {
+        if (ModelState.IsValid)
+        {
+            Microsoft.AspNetCore.Identity.SignInResult results = await _signInManager.PasswordSignInAsync(loginVM.Email, loginVM.Password, loginVM.RememberMe, false);
+
+            if (results.Succeeded)
+            {
+                if (string.IsNullOrEmpty(loginVM.RedirectUrl))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return LocalRedirect(loginVM.RedirectUrl);
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Invalid Login Attempt");
+            }
+        }
+
+        return View(loginVM);
+    }
+
     public IActionResult Register()
     {
 

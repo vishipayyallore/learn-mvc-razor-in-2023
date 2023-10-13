@@ -1,6 +1,4 @@
-﻿using Resorts.Domain.Entities;
-
-namespace WhiteLagoon.Application.Common.Utility
+﻿namespace WhiteLagoon.Application.Common.Utility
 {
     public static class SD
     {
