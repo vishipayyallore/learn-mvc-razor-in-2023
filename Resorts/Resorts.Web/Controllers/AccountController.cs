@@ -63,6 +63,11 @@ public class AccountController(IUnitOfWork unitOfWork, UserManager<ApplicationUs
         return RedirectToAction("Index", "Home");
     }
 
+    public IActionResult AccessDenied()
+    {
+        return View();
+    }
+
     public IActionResult Register()
     {
 
