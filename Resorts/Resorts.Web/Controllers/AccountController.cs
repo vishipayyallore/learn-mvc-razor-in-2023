@@ -68,8 +68,9 @@ public class AccountController(IUnitOfWork unitOfWork, UserManager<ApplicationUs
         return View();
     }
 
-    public IActionResult Register()
+    public IActionResult Register(string? returnUrl)
     {
+        returnUrl ??= Url.Content("~/");
 
         if (!_roleManager.RoleExistsAsync(SD.Role_Admin).GetAwaiter().GetResult())
         {
@@ -87,7 +88,8 @@ public class AccountController(IUnitOfWork unitOfWork, UserManager<ApplicationUs
             {
                 Text = x.Name,
                 Value = x.Name
-            })
+            }),
+            RedirectUrl = returnUrl
         };
 
         return View(registerVM);
