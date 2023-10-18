@@ -17,6 +17,13 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                  .AddEntityFrameworkStores<ApplicationDbContext>()
                  .AddDefaultTokenProviders();
 
+// We can override these locations
+builder.Services.ConfigureApplicationCookie(option =>
+{
+    option.AccessDeniedPath = "/Account/AccessDenied";
+    option.LoginPath = "/Account/Login";
+});
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();

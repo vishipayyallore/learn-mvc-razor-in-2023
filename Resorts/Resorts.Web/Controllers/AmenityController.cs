@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Resorts.Application.Common.Interfaces;
 using Resorts.Web.ViewModels;
+using WhiteLagoon.Application.Common.Utility;
 
 namespace Resorts.Web.Controllers;
 
+[Authorize(Roles = SD.Role_Admin)]
 public class AmenityController(IUnitOfWork unitOfWork) : Controller
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));

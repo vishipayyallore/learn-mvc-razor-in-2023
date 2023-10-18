@@ -63,6 +63,11 @@ public class AccountController(IUnitOfWork unitOfWork, UserManager<ApplicationUs
         return RedirectToAction("Index", "Home");
     }
 
+    public IActionResult AccessDenied()
+    {
+        return View();
+    }
+
     public IActionResult Register()
     {
 
@@ -91,47 +96,49 @@ public class AccountController(IUnitOfWork unitOfWork, UserManager<ApplicationUs
     [HttpPost]
     public async Task<IActionResult> Register(RegisterVM registerVM)
     {
-        ApplicationUser user = new()
+        if (ModelState.IsValid)
         {
-            Name = registerVM.Name,
-            Email = registerVM.Email,
-            PhoneNumber = registerVM.PhoneNumber,
-            NormalizedEmail = registerVM.Email.ToUpper(),
-            EmailConfirmed = true,
-            UserName = registerVM.Email,
-            CreatedAt = DateTime.Now,
-        };
-
-        IdentityResult results = await _userManager.CreateAsync(user, registerVM.Password);
-
-        if (results.Succeeded)
-        {
-            if (!string.IsNullOrEmpty(registerVM.Role))
+            ApplicationUser user = new()
             {
-                _ = await _userManager.AddToRoleAsync(user, registerVM.Role);
+                Name = registerVM.Name,
+                Email = registerVM.Email,
+                PhoneNumber = registerVM.PhoneNumber,
+                NormalizedEmail = registerVM.Email.ToUpper(),
+                EmailConfirmed = true,
+                UserName = registerVM.Email,
+                CreatedAt = DateTime.Now,
+            };
+
+            IdentityResult results = await _userManager.CreateAsync(user, registerVM.Password);
+
+            if (results.Succeeded)
+            {
+                if (!string.IsNullOrEmpty(registerVM.Role))
+                {
+                    _ = await _userManager.AddToRoleAsync(user, registerVM.Role);
+                }
+                else
+                {
+                    _ = await _userManager.AddToRoleAsync(user, SD.Role_Customer);
+                }
+
+                await _signInManager.SignInAsync(user, isPersistent: false);
+
+                if (string.IsNullOrEmpty(registerVM.RedirectUrl))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return LocalRedirect(registerVM.RedirectUrl);
+                }
             }
-            else
-            {
-                _ = await _userManager.AddToRoleAsync(user, SD.Role_Customer);
-            }
 
-            await _signInManager.SignInAsync(user, isPersistent: false);
-
-            if (string.IsNullOrEmpty(registerVM.RedirectUrl))
+            foreach (var error in results.Errors)
             {
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                return LocalRedirect(registerVM.RedirectUrl);
+                ModelState.AddModelError("", error.Description);
             }
         }
-
-        foreach (var error in results.Errors)
-        {
-            ModelState.AddModelError("", error.Description);
-        }
-
         registerVM.RoleList = _roleManager.Roles.Select(x => new SelectListItem
         {
             Text = x.Name,
