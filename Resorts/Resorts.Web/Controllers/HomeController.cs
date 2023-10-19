@@ -23,6 +23,16 @@ public class HomeController(IUnitOfWork unitOfWork, ILogger<HomeController> logg
         return View(homeVM);
     }
 
+    [HttpPost]
+    public IActionResult Index(HomeVM homeVM)
+    {
+        _logger.LogInformation("Starting HomeController::Index().");
+
+        homeVM.VillaList = _unitOfWork.Villa.GetAll(includeProperties: "VillaAmenity");
+
+        return View(homeVM);
+    }
+
     public IActionResult Privacy()
     {
         return View();
