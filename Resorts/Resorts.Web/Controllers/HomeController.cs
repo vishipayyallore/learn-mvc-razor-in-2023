@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Resorts.Application.Common.Interfaces;
+using Resorts.Domain.Entities;
 using Resorts.Web.ViewModels;
 
 namespace Resorts.Web.Controllers;
@@ -24,13 +25,26 @@ public class HomeController(IUnitOfWork unitOfWork, ILogger<HomeController> logg
     }
 
     [HttpPost]
-    public IActionResult Index(HomeVM homeVM)
+    public IActionResult GetVillasByDate(int nights, DateOnly checkInDate)
     {
-        _logger.LogInformation("Starting HomeController::Index().");
+        IEnumerable<Villa> villaList = _unitOfWork.Villa.GetAll(includeProperties: "VillaAmenity");
 
-        homeVM.VillaList = _unitOfWork.Villa.GetAll(includeProperties: "VillaAmenity");
+        foreach (var villa in villaList)
+        {
+            if (villa.Id % 2 == 0)
+            {
+                villa.IsAvailable = false;
+            }
+        }
 
-        return View(homeVM);
+        HomeVM homeVM = new()
+        {
+            VillaList = villaList,
+            Nights = nights,
+            CheckInDate = checkInDate,
+        };
+
+        return PartialView("_VillaList", homeVM);
     }
 
     public IActionResult Privacy()
