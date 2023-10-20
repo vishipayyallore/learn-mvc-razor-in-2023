@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Resorts.Application.Common.Interfaces;
 using Resorts.Domain.Entities;
 
@@ -13,6 +14,7 @@ public class BookingController(IUnitOfWork unitOfWork) : Controller
         return View();
     }
 
+    [Authorize]
     public IActionResult FinalizeBooking(int villaId, DateOnly checkInDate, int nights)
     {
         Booking booking = new()
