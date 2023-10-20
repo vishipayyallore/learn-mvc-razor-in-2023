@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Resorts.Application.Common.Interfaces;
+﻿using Resorts.Application.Common.Interfaces;
 using Resorts.Domain.Entities;
 using Resorts.Infrastructure.Data;
 
