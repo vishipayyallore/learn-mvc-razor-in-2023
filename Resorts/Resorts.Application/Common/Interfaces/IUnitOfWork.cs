@@ -10,7 +10,7 @@ public interface IUnitOfWork
 
     IBookingRepository Booking { get; }
 
-    IApplicationUserRepository ApplicationUser { get; }
+    IApplicationUserRepository User { get; }
 
     void Save();
 }

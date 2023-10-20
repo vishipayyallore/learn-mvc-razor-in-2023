@@ -15,7 +15,7 @@ public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork
 
     public IBookingRepository Booking { get; private set; } = new BookingRepository(context);
 
-    public IApplicationUserRepository ApplicationUser { get; private set; } = new ApplicationUserRepository(context);
+    public IApplicationUserRepository User { get; private set; } = new ApplicationUserRepository(context);
 
     public void Save()
     {
