@@ -8,5 +8,7 @@ public interface IUnitOfWork
 
     IAmenityRepository Amenity { get; }
 
+    IBookingRepository Booking { get; }
+
     void Save();
 }
