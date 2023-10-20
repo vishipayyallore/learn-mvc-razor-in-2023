@@ -13,6 +13,8 @@ public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork
 
     public IAmenityRepository Amenity { get; private set; } = new AmenityRepository(context);
 
+    public IBookingRepository Booking { get; private set; } = new BookingRepository(context);
+
     public void Save()
     {
         _ = _context.SaveChanges();
