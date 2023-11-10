@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Resorts.Application.Common.Interfaces;
+using Resorts.Application.Common.Utility;
 using Resorts.Web.ViewModels;
-using WhiteLagoon.Application.Common.Utility;
 
 namespace Resorts.Web.Controllers;
 
