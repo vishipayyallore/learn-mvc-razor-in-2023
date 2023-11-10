@@ -136,6 +136,11 @@ public class BookingController(IUnitOfWork unitOfWork) : Controller
             bookings = _unitOfWork.Booking.GetAll(u => u.UserId == userId, includeProperties: "User,Villa");
         }
 
+        if (!string.IsNullOrEmpty(status))
+        {
+            bookings = bookings.Where(r => r.Status.ToLower() == status.ToLower());
+        }
+
         return Json(new { data = bookings });
     }
 
