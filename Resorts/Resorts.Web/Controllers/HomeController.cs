@@ -31,15 +31,15 @@ public class HomeController(IUnitOfWork unitOfWork, ILogger<HomeController> logg
         Thread.Sleep(250);
 
         IEnumerable<Villa> villaList = _unitOfWork.Villa.GetAll(includeProperties: "VillaAmenity");
-        IEnumerable<VillaNumber> villaNumbersList = _unitOfWork.VillaNumber.GetAll();
-        IEnumerable<Booking> bookedVillas = _unitOfWork.Booking.GetAll(r => r.Status == SD.StatusApproved || r.Status == SD.StatusCheckedIn);
+        List<VillaNumber> villaNumbersList = _unitOfWork.VillaNumber.GetAll().ToList();
+        List<Booking> bookedVillas = _unitOfWork.Booking.GetAll(r => r.Status == SD.StatusApproved || r.Status == SD.StatusCheckedIn).ToList();
 
         foreach (var villa in villaList)
         {
-            if (villa.Id % 2 == 0)
-            {
-                villa.IsAvailable = false;
-            }
+            int roomAvailable = SD.VillaRoomsAvailable_Count(villa.Id, villaNumbersList, checkInDate,
+                nights, bookedVillas);
+
+            villa.IsAvailable = roomAvailable > 0;
         }
 
         HomeVM homeVM = new()
