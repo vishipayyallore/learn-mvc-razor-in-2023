@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Resorts.Application.Common.Interfaces;
+using Resorts.Application.Common.Utility;
 using Resorts.Domain.Entities;
 using Resorts.Web.ViewModels;
 
@@ -30,6 +31,8 @@ public class HomeController(IUnitOfWork unitOfWork, ILogger<HomeController> logg
         Thread.Sleep(250);
 
         IEnumerable<Villa> villaList = _unitOfWork.Villa.GetAll(includeProperties: "VillaAmenity");
+        IEnumerable<VillaNumber> villaNumbersList = _unitOfWork.VillaNumber.GetAll();
+        IEnumerable<Booking> bookedVillas = _unitOfWork.Booking.GetAll(r => r.Status == SD.StatusApproved || r.Status == SD.StatusCheckedIn);
 
         foreach (var villa in villaList)
         {
