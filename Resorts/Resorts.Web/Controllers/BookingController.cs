@@ -117,6 +117,22 @@ public class BookingController(IUnitOfWork unitOfWork) : Controller
         return View(bookingId);
     }
 
+    [Authorize]
+    public IActionResult BookingDetails(int bookingId)
+    {
+        Booking bookingFromDb = _unitOfWork.Booking.Get(u => u.Id == bookingId, includeProperties: "User,Villa");
+
+        //if (bookingFromDb.VillaNumber == 0 && bookingFromDb.Status == SD.StatusApproved)
+        //{
+        //    var availableVillaNumber = AssignAvailableVillaNumberByVilla(bookingFromDb.VillaId);
+
+        //    bookingFromDb.VillaNumbers = _villaNumberService.GetAllVillaNumbers().Where(u => u.VillaId == bookingFromDb.VillaId
+        //    && availableVillaNumber.Any(x => x == u.Villa_Number)).ToList();
+        //}
+
+        return View(bookingFromDb);
+    }
+
     #region API Calls
     [HttpGet]
     [Authorize]
