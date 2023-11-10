@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Resorts.Application.Common.Interfaces;
+using Resorts.Application.Common.Utility;
 using Resorts.Domain.Entities;
 using Stripe.Checkout;
 using System.Security.Claims;
-using WhiteLagoon.Application.Common.Utility;
 
 namespace Resorts.Web.Controllers;
 

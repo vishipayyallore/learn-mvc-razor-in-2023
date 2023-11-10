@@ -1,7 +1,7 @@
 ﻿using Resorts.Application.Common.Interfaces;
+using Resorts.Application.Common.Utility;
 using Resorts.Domain.Entities;
 using Resorts.Infrastructure.Data;
-using WhiteLagoon.Application.Common.Utility;
 
 namespace Resorts.Infrastructure.Repositories;
 
