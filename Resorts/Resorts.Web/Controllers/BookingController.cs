@@ -55,13 +55,31 @@ public class BookingController(IUnitOfWork unitOfWork) : Controller
         booking.Status = SD.StatusPending;
         booking.BookingDate = DateTime.Now;
 
+        List<VillaNumber> villaNumbersList = _unitOfWork.VillaNumber.GetAll().ToList();
+        List<Booking> bookedVillas = _unitOfWork.Booking.GetAll(r => r.Status == SD.StatusApproved || r.Status == SD.StatusCheckedIn).ToList();
+
+        int roomAvailable = SD.VillaRoomsAvailable_Count(villa.Id, villaNumbersList, booking.CheckInDate,
+            booking.Nights, bookedVillas);
+
+        if (roomAvailable == 0)
+        {
+            TempData["Success"] = "Room has been sold out.";
+
+            return RedirectToAction(nameof(FinalizeBooking), new
+            {
+                villaId = booking.VillaId,
+                checkInDate = booking.CheckInDate,
+                nights = booking.Nights
+            });
+        }
+
         _unitOfWork.Booking.Add(booking);
         _unitOfWork.Save();
 
         var domain = Request.Scheme + "://" + Request.Host.Value + "/";
         var options = new SessionCreateOptions
         {
-            LineItems = new List<SessionLineItemOptions>(),
+            LineItems = [],
             Mode = "payment",
             SuccessUrl = domain + $"booking/BookingConfirmation?bookingId={booking.Id}",
             CancelUrl = domain + $"booking/FinalizeBooking?villaId={booking.VillaId}&checkInDate={booking.CheckInDate}&nights={booking.Nights}",
