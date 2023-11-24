@@ -4,6 +4,7 @@ using Resorts.Application.Common.Interfaces;
 using Resorts.Application.Common.Utility;
 using Resorts.Domain.Entities;
 using Stripe.Checkout;
+using System.Globalization;
 using System.Security.Claims;
 
 namespace Resorts.Web.Controllers;
@@ -18,20 +19,21 @@ public class BookingController(IUnitOfWork unitOfWork) : Controller
     }
 
     [Authorize]
-    public IActionResult FinalizeBooking(int villaId, DateOnly checkInDate, int nights)
+    public IActionResult FinalizeBooking(int villaId, string checkInDate, int nights)
     {
         var claimsIdentity = (ClaimsIdentity)User.Identity!;
         var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)!.Value;
 
+        DateOnly checkInDateOnly = DateOnly.ParseExact(checkInDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
         ApplicationUser user = _unitOfWork.User.Get(u => u.Id == userId)!;
 
         Booking booking = new()
         {
             VillaId = villaId,
             Villa = _unitOfWork.Villa.Get(u => u.Id == villaId, includeProperties: "VillaAmenity"),
-            CheckInDate = checkInDate,
+            CheckInDate = checkInDateOnly,
             Nights = nights,
-            CheckOutDate = checkInDate.AddDays(nights),
+            CheckOutDate = checkInDateOnly.AddDays(nights),
             UserId = userId,
             Phone = user.PhoneNumber,
             Email = user.Email,
@@ -162,6 +164,7 @@ public class BookingController(IUnitOfWork unitOfWork) : Controller
 
         return RedirectToAction(nameof(BookingDetails), new { bookingId = booking.Id });
     }
+
     [HttpPost]
     [Authorize(Roles = SD.Role_Admin)]
     public IActionResult CheckOut(Booking booking)
@@ -173,6 +176,7 @@ public class BookingController(IUnitOfWork unitOfWork) : Controller
 
         return RedirectToAction(nameof(BookingDetails), new { bookingId = booking.Id });
     }
+
     [HttpPost]
     [Authorize(Roles = SD.Role_Admin)]
     public IActionResult CancelBooking(Booking booking)
@@ -231,7 +235,6 @@ public class BookingController(IUnitOfWork unitOfWork) : Controller
 
         return Json(new { data = bookings });
     }
-
     #endregion
 
 }
