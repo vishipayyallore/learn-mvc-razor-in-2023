@@ -162,6 +162,7 @@ public class BookingController(IUnitOfWork unitOfWork) : Controller
 
         return RedirectToAction(nameof(BookingDetails), new { bookingId = booking.Id });
     }
+
     [HttpPost]
     [Authorize(Roles = SD.Role_Admin)]
     public IActionResult CheckOut(Booking booking)
@@ -173,6 +174,7 @@ public class BookingController(IUnitOfWork unitOfWork) : Controller
 
         return RedirectToAction(nameof(BookingDetails), new { bookingId = booking.Id });
     }
+
     [HttpPost]
     [Authorize(Roles = SD.Role_Admin)]
     public IActionResult CancelBooking(Booking booking)
@@ -231,7 +233,6 @@ public class BookingController(IUnitOfWork unitOfWork) : Controller
 
         return Json(new { data = bookings });
     }
-
     #endregion
 
 }
